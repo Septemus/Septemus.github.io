@@ -2,6 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>https://Septemus.github.io/about/</loc><lastmod>2023-01-11T16:38:52&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://Septemus.github.io/categories/</loc><lastmod>2023-01-09T18:33:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://Septemus.github.io/posts/</loc><lastmod>2023-01-09T18:33:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>https://Septemus.github.io/categories/projects/</loc><lastmod>2023-01-09T18:33:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
