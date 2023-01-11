@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>基于局域网的音视频即时聊天客户端及服务器软件设计与开发 - Septemus&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="基于局域网的音视频即时聊天客户端及服务器软件设计与开发" />
+<meta property="og:description" content="Warning 此项目成员均为学生，还在开发过程中，因此相比企业级项目而言页面简陋技术落后，望看到这篇文章的高手轻喷。并且如果发现BUG或有改进建议，欢迎" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/webrtc_communication/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-09T18:33:53+08:00" />
+<meta property="article:modified_time" content="2023-01-09T18:33:53+08:00" /><meta property="og:site_name" content="Septemus" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="基于局域网的音视频即时聊天客户端及服务器软件设计与开发"/>
+<meta name="twitter:description" content="Warning 此项目成员均为学生，还在开发过程中，因此相比企业级项目而言页面简陋技术落后，望看到这篇文章的高手轻喷。并且如果发现BUG或有改进建议，欢迎"/>
+<meta name="application-name" content="Septemus">
+<meta name="apple-mobile-web-app-title" content="Septemus"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/webrtc_communication/" /><link rel="prev" href="http://example.org/jikao/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "基于局域网的音视频即时聊天客户端及服务器软件设计与开发",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/webrtc_communication\/"
+        },"genre": "posts","wordcount":  5847 ,
+        "url": "http:\/\/example.org\/webrtc_communication\/","datePublished": "2023-01-09T18:33:53+08:00","dateModified": "2023-01-09T18:33:53+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Septemus"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Septemus&#39;s Blog">Septemus</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="My blogs"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Septemus&#39;s Blog">Septemus</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="My blogs">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">基于局域网的音视频即时聊天客户端及服务器软件设计与开发</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Septemus</a></span>&nbsp;<span class="post-category">included in <a href="/categories/projects/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Projects</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-09">2023-01-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5847 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#摘要">摘要</a></li>
+    <li><a href="#模块介绍">模块介绍</a>
+      <ul>
+        <li><a href="#主服务器端">主服务器端</a>
+          <ul>
+            <li><a href="#前端">前端</a></li>
+            <li><a href="#后端">后端</a></li>
+          </ul>
+        </li>
+        <li><a href="#信令服务器端">信令服务器端</a>
+          <ul>
+            <li><a href="#webrtc开发环境搭建">WebRTC开发环境搭建</a></li>
+            <li><a href="#信令服务器端-1">信令服务器端</a></li>
+            <li><a href="#浏览器前端">浏览器前端</a></li>
+          </ul>
+        </li>
+        <li><a href="#移动端">移动端</a></li>
+      </ul>
+    </li>
+    <li><a href="#核心代码">核心代码</a>
+      <ul>
+        <li><a href="#注册和登录">注册和登录</a>
+          <ul>
+            <li><a href="#前端-1">前端</a></li>
+            <li><a href="#后端-1">后端</a></li>
+          </ul>
+        </li>
+        <li><a href="#用户界面">用户界面</a>
+          <ul>
+            <li><a href="#前端-2">前端</a></li>
+            <li><a href="#后端-2">后端</a></li>
+          </ul>
+        </li>
+        <li><a href="#通话页面">通话页面</a>
+          <ul>
+            <li><a href="#前端-3">前端</a></li>
+            <li><a href="#后端-3">后端</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#成品效果">成品效果</a>
+      <ul>
+        <li><a href="#pc端">pc端</a></li>
+        <li><a href="#移动端-1">移动端</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition warning">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">此项目成员均为学生，还在开发过程中，因此相比企业级项目而言页面简陋技术落后，望看到这篇文章的高手轻喷。并且如果发现BUG或有改进建议，欢迎和我联系！</div>
+        </div>
+    </div>
+<blockquote>
+<h2 id="摘要">摘要</h2>
+</blockquote>
+<p>本课题拟重点关注应急通信的需求，在临时搭建的局域网通信环境下，设计与开发适用于手机、平板和电脑的音视频即时聊天工具，包括客户端和服务器软件，实现无互联网环境下的局域网即时通信功能。</p>
+<p>以下是本课题所用到的技术：</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Javascript</li>
+<li>Electron</li>
+<li>Cordova</li>
+<li>nodejs</li>
+</ul>
+<p>Github源代码：</p>
+<blockquote>
+<h2 id="模块介绍">模块介绍</h2>
+</blockquote>
+<blockquote>
+<h3 id="主服务器端">主服务器端</h3>
+</blockquote>
+<blockquote>
+<h4 id="前端">前端</h4>
+</blockquote>
+<p>前端页面的设计包括HTML+CSS的网页展示模块以及基于JavaScript前端脚本模块。<br>
+其中，前端脚本模块所做的工作如下：</p>
+<ol>
+<li>利用DOM操作获取到网页中输入框的内容，并进行初步的模式匹配，以防止不合法的输入出现。</li>
+<li>利用Ajax机制进行前后端数据通信，通过访问后端服务器所提供的接口URL来进行相关的注册、登录、信息修改以及网页跳转的工作。</li>
+<li>在获得了后端服务器发来的成功登录的信息后，将报文中的token保存在浏览器本地的sessionStorage中，并在后续的每次访问中携带该token。</li>
+</ol>
+<blockquote>
+<h4 id="后端">后端</h4>
+</blockquote>
+<p>后端需要引入数据库模块用于记录用户的注册信息。在本项目中使用了MySQL关系型数据库，用过JavaScript操作SQL语句进行数据的增、删、查、改操作。<br>
+服务器对外提供了登录、注册、用户信息修改的接口，以登录接口为例，登录接口的URL地址如下：http://服务器IP:服务端口号/api/login<br>
+后端提供登录、注册、信息增删的服务之前需要采取如下操作：</p>
+<ol>
+<li>利用开源的joi模块进行前端所发来的数据的模式识别，以防止不合法的输入被传入数据库。</li>
+<li>若因为注册、信息修改等操作导致用户密码被设置或修改，需要利用开源的bscryptjs模块对密码进行加密后再写入数据库，以防止泄密。在每次登录时，需要将从数据库中取出的密码解密后再与前端所发来的密码比对。</li>
+<li>在验证用户信息后，主服务器会依据从数据库中获取到的用户信息，利用开源的jsonwebtoken模块生成一个JSON格式的token串，并将该token串以及相应的信息传输给前端，随后前端的每次带权限的请求（如获取WebRTC即时音视频服务、访问主页等）都需要携带此token，后端验证token通过后才提供相应的服务。
+此外，服务器需要将前端页面所需要的所有HTML以及相关的CSS样式、JavaScript脚本文件设置成静态资源以方面用户进行访问。</li>
+</ol>
+<blockquote>
+<h3 id="信令服务器端">信令服务器端</h3>
+</blockquote>
+<blockquote>
+<h4 id="webrtc开发环境搭建">WebRTC开发环境搭建</h4>
+</blockquote>
+<p>WebRTC目前已经被Trident、Chromium、Webkit等多种浏览器内核所支持，具有很高的兼容性，不需要额外的下载外部模块。但是，如表4-1所示，由于不同厂商在开发WebRTC项目时对同一个接口采用了不同的接口名，不同的浏览器在运行同一个WebRTC应用时可能会出现接口不适配的问题。</p>
+<table>
+<thead>
+<tr>
+<th>WebRTC标准</th>
+<th>Chrome</th>
+<th>Firefox</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getUserMedia</td>
+<td>webkitGetUserMedia</td>
+<td>getUserMedia</td>
+</tr>
+<tr>
+<td>RTCPeerConnection</td>
+<td>webkitRTCPeerConnection</td>
+<td>RTCPeerConnection</td>
+</tr>
+<tr>
+<td>RTCsessionDescription</td>
+<td>RTCsessionDescription</td>
+<td>RTCsessionDescription</td>
+</tr>
+<tr>
+<td>RTCIceCandidate</td>
+<td>RTCIceCandidate</td>
+<td>RTCIceCandidate</td>
+</tr>
+</tbody>
+</table>
+<p>因此，需要采用WebRTC官方提供的适配器adapter-latest.js文件才能解决如上的兼容性问题。该兼容性解决方案需要在渲染页面时引入，即在即时通话的HTML页面中使用<code>&lt;script src=&quot;adapter-latest.js&quot;&gt;&lt;/script&gt;</code>语句引入适配器文件。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/process1.png"
+        data-srcset="/images/process1.png, /images/process1.png 1.5x, /images/process1.png 2x"
+        data-sizes="auto"
+        alt="/images/process1.png"
+        title="process1" /></p>
+<blockquote>
+<h4 id="信令服务器端-1">信令服务器端</h4>
+</blockquote>
+<ol>
+<li>
+<p>服务器使用app.use(express.static(path.join(__dirname, &lsquo;../public&rsquo;)))语句将对外提供的HTML、CSS以及JavaScript脚本文件设置为静态资源，客户端可以通过URL来访问这些资源以获取即时通信服务。其中，app为信令服务器所创建的HTTPS服务器实例，‘public’为存放客户端文件的目录。</p>
+</li>
+<li>
+<p>服务器在获取到客户端的URL后，根据URL中携带的jwt token字符进行身份校验，若token验证通过才将URL对应的资源页面提供给客户端，否则，拒绝这次请求。</p>
+</li>
+<li>
+<p>使用socket.io技术实时监听客户端所发来的数据，以协助通信双方的信令交互。
+服务器的处理流程如下图所示：</p>
+</li>
+</ol>
+ <img src='/images/process2.jpg' width='60%' >
+<blockquote>
+<h4 id="浏览器前端">浏览器前端</h4>
+</blockquote>
+<p>浏览器前端的所需要完成功能则相对较多，包括获取音视频流、协商通信配置、建立P2P连接等，按照顺序可以分为以下几个步骤：</p>
+<ol>
+<li>
+<p>获取客户端本地的音视频流
+由于针对不同的客户端以及浏览器会有不同的硬件设备，需要为这些不同的设备或浏览器提供兼容性的解决方案，因此需要引入由WebRTC官方提供的适配器模块
+adapter.js。随后通过getUserMedia函数获取音视频流。</p>
+</li>
+<li>
+<p>建立PeerConnection对象
+在客户端的JavaScript脚本内创建PeerConnection，由于创建、协调并维持通信双方的连接。随后，将PeerConnection的ontrack成员方法与远程视频流绑定，将
+PeerConnection的addStream成员方法与本地视频流绑定。</p>
+</li>
+<li>
+<p>加入房间
+在访问即时音视频通信服务中，会在get请求中附带room参数，在成功获取到服务后，前端会向信令服务器使用socket.io的emit函数发送一个名为rooms的事件，事
+件携带的数据为get请求中room的参数。<br>
+服务器监听到rooms事件后，会将该客户加入值为room的房间，随后，该客户的所有信令信息仅在值为room的房间中转发。</p>
+</li>
+<li>
+<p>协商会话描述配置
+受限于通信双方的硬件设置等因素的影响，在正式通信之前通信双方需要协商通信的配置信息。主叫向被叫发送PeerConnection的成员变量 localDescription，被
+叫通过使用PeerConnection的成员方法setRemoteDescription来实现主叫与被叫之间的会话描述配置。<br>
+客户端通过socket.io的emit函数发送一个名为message的事件，事件携带的参数为localDescription。</p>
+</li>
+<li>
+<p>协商连接双方的网络信息
+由于通信双方可能处于NAT网络之后，需要通过ICE服务器提供的内网穿透服务才能正式建立连接，因此通信双方之间需要发送RTCIceCandidate这一对象，该对象包
+含的属性包括本地IP地址、公网IP地址等等所有相关网络配置信息。<br>
+该配置信息的发送是基于socke.io发送的名为message的事件来实现。</p>
+</li>
+<li>
+<p>建立P2P连接
+主叫通过调用PeerConnection的成员方法createOffer向被叫发起建立连接请求，被叫收到请求后可以拒绝这个请求或调用PeerConnection的成员方法createAnswer
+来响应这个请求。<br>
+主叫与被叫所发送的信息都是基于socket.io的emit函数来发送一个名为message的事件。</p>
+</li>
+</ol>
+<blockquote>
+<h3 id="移动端">移动端</h3>
+</blockquote>
+<p>由于项目基于web开发，所以选择cordova框架进行打包移植。打包的流程大致如下：</p>
+<ol>
+<li>
+<p>相关的环境配置</p>
+</li>
+<li>
+<p>创造cordova项目</p>
+</li>
+<li>
+<p>在项目中添加移动端平台</p>
+</li>
+<li>
+<p>将前端页面文件移入www文件夹</p>
+</li>
+<li>
+<p>将页面布局调整以适应手机大小</p>
+</li>
+<li>
+<p>在config.xml中修改权限解决跨域问题</p>
+</li>
+<li>
+<p>生成app</p>
+</li>
+<li>
+<p>后续实机调试</p>
+</li>
+</ol>
+<blockquote>
+<h2 id="核心代码">核心代码</h2>
+</blockquote>
+<blockquote>
+<h3 id="注册和登录">注册和登录</h3>
+</blockquote>
+<blockquote>
+<h4 id="前端-1">前端</h4>
+</blockquote>
+<p>为按钮绑定ajax事件将用户输入的信息传到后端，根据后端返回信息决定下一步。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ip</span> <span class="o">=</span> <span class="s1">&#39;192.168.101.108&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">login_btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;login_btn&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">id</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">password</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#login_btn&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="s1">&#39;id=&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s1">&#39;&amp;password=&#39;</span> <span class="o">+</span> <span class="nx">password</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;clicked login&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">ip</span> <span class="o">+</span> <span class="s1">&#39;:3007/api/login&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">contentType</span><span class="o">:</span> <span class="s1">&#39;application/x-www-form-urlencoded&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">data</span><span class="o">:</span> <span class="nx">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">window</span><span class="p">.</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">serverIP</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">serverIP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;登录成功,跳转至主界面&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">&#34;./HomePage.html&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">alert</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">register</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">Rid</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;Rid&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">Rname</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;Rname&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">Rpassword</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;Rpassword&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#register&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="s2">&#34;id=&#34;</span> <span class="o">+</span> <span class="nx">Rid</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s2">&#34;&amp;password=&#34;</span> <span class="o">+</span> <span class="nx">Rpassword</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s2">&#34;&amp;name=&#34;</span> <span class="o">+</span> <span class="nx">Rname</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">ip</span> <span class="o">+</span> <span class="s1">&#39;:3007/api/reguser&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;post&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">ip</span> <span class="o">+</span> <span class="s1">&#39;:3007/api/reguser&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">contentType</span><span class="o">:</span> <span class="s1">&#39;application/x-www-form-urlencoded&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">data</span><span class="o">:</span> <span class="nx">params</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">alert</span><span class="p">(</span><span class="s2">&#34;注册成功,点击回到登陆界面&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">reload</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">alert</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">=&gt;{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;failure:&#34;</span><span class="p">,</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;something wrong&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="后端-1">后端</h4>
+</blockquote>
+<p>在数据库中检索用户输入信息并执行相关操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="nx">exports</span><span class="p">.</span><span class="nx">regUser</span> <span class="o">=</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 获取客户端提交到服务器的用户信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">userinfo</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 定义 SQL 语句，查询用户名是否被占用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">const</span> <span class="nx">sqlStr</span> <span class="o">=</span> <span class="s1">&#39;select * from users where id=?&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sqlStr</span><span class="p">,</span> <span class="nx">userinfo</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 执行 SQL 语句失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 判断用户名是否被占用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="s1">&#39;用户名被占用，请更换其他用户名！&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 bcrypt.hashSync() 对密码进行加密
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">userinfo</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hashSync</span><span class="p">(</span><span class="nx">userinfo</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 定义插入新用户的 SQL 语句
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">sql</span> <span class="o">=</span> <span class="s1">&#39;insert into users set ?&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 调用 db.query() 执行 SQL 语句
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">userinfo</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">password</span><span class="o">:</span> <span class="nx">userinfo</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">userinfo</span><span class="p">.</span><span class="nx">name</span> <span class="p">},</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 判断 SQL 语句是否执行成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// if (err) return res.send({ status: 1, message: err.message })
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 判断影响行数是否为 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">affectedRows</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="s1">&#39;注册用户失败，请稍后再试！&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 注册用户成功
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="s1">&#39;注册成功！&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">ip</span> <span class="o">+</span> <span class="s1">&#39;:3007&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 登录的处理函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;login post received!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">userinfo</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">userinfo</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">sql</span> <span class="o">=</span> <span class="s1">&#39;select * from users where id = ?&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">sql</span><span class="p">,</span> <span class="nx">userinfo</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">results</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;error!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span> <span class="o">!==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="s1">&#39;登陆失败&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//比较密码是否正确
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">compare</span> <span class="o">=</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compareSync</span><span class="p">(</span><span class="nx">userinfo</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">password</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">compare</span><span class="p">)</span> <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">cc</span><span class="p">(</span><span class="s1">&#39;密码输入错误&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//else return res.cc(&#39;登陆成功&#39;, 0);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">user_pic</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="p">};</span><span class="c1">//...为展开运算符，将results[0]中所有元素赋给user
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//利用用户信息生成token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwttoken</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="nx">jwtconfig</span><span class="p">.</span><span class="nx">jwtSecretKey</span><span class="p">,</span> <span class="p">{</span> <span class="nx">expiresIn</span><span class="o">:</span> <span class="nx">jwtconfig</span><span class="p">.</span><span class="nx">expiresIn</span> <span class="p">});</span><span class="c1">//有效期为3小时
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">status</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;登陆成功！&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">token</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;http://&#39;</span> <span class="o">+</span> <span class="nx">ip</span> <span class="o">+</span> <span class="s1">&#39;:3007/HomePage.html&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">name</span><span class="o">:</span> <span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">id</span><span class="o">:</span> <span class="nx">results</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">serverIP</span><span class="o">:</span> <span class="nx">ip</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="用户界面">用户界面</h3>
+</blockquote>
+<p>通过socket实现用户列表的显示和更新</p>
+<blockquote>
+<h4 id="前端-2">前端</h4>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;connect&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">socketID</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;sid&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">socketID</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;called&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;this is info inside called:&#39;</span><span class="p">,</span><span class="nx">info</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">calledID</span> <span class="o">==</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Woops,it seems you are being called!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">window</span><span class="p">.</span><span class="nx">blur</span><span class="p">();</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">focus</span><span class="p">(),</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">&#39;您正在被&#39;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">callingID</span> <span class="o">+</span> <span class="s1">&#39;呼叫！&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">r</span> <span class="o">==</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;refuse&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">&#39;callingSid&#39;</span><span class="o">:</span> <span class="nx">info</span><span class="p">.</span><span class="nx">callingSid</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// window.open(&#39;https://&#39; + sessionStorage.serverIP + &#39;:8443/index.html?room=&#39; + info.callingID+&#39;&amp;id=&#39;+sessionStorage.id);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;agree&#39;</span><span class="p">,</span> <span class="nx">info</span><span class="p">.</span><span class="nx">callingSid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="s1">&#39;https://&#39;</span> <span class="o">+</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">serverIP</span> <span class="o">+</span> <span class="s1">&#39;:8443/index.html?room=&#39;</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">callingID</span><span class="o">+</span><span class="s1">&#39;&amp;id=&#39;</span><span class="o">+</span><span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;refuse&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">alert</span><span class="p">(</span><span class="nx">data</span> <span class="o">+</span> <span class="s1">&#39;拒绝了您的通话请求！&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;agree&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// window.open(&#39;https://&#39; + sessionStorage.serverIP + &#39;:8443/index.html?room=&#39; + sessionStorage.id+&#39;&amp;id=&#39;+sessionStorage.id);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;your invitation has been accepted!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="s1">&#39;https://&#39;</span> <span class="o">+</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">serverIP</span> <span class="o">+</span> <span class="s1">&#39;:8443/index.html?room=&#39;</span> <span class="o">+</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="o">+</span><span class="s1">&#39;&amp;id=&#39;</span><span class="o">+</span><span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="nx">io</span><span class="p">(</span><span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">serverIP</span> <span class="o">+</span> <span class="s1">&#39;:3007&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span> <span class="o">!=</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">table</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//创建Sid栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">var</span> <span class="nx">td_sid</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">td_sid</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">sid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_sid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//创建id栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">var</span> <span class="nx">td_id</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">td_id</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">td_id</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//创建name栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">var</span> <span class="nx">td_name</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">td_name</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//创建会话图标栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">var</span> <span class="nx">td_RTC</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//创建图标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;callingID&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;calledID&#39;</span><span class="o">:</span> <span class="nx">td_id</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;callingSid&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">socketID</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;calling&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">img</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="s1">&#39;../assets/images/camera.webp&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">img</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;30px&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">button</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;online&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!=</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//动态创建行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">tr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">table</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//创建Sid栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">td_sid</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">td_sid</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">sid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_sid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//创建id栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">td_id</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">td_id</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">td_id</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//创建name栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">td_name</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">td_name</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">td_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//创建会话图标栏
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">td_RTC</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//创建图标
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;button&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">button</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;callingID&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;calledID&#39;</span><span class="o">:</span> <span class="nx">td_id</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;callingSid&#39;</span><span class="o">:</span> <span class="nx">sessionStorage</span><span class="p">.</span><span class="nx">socketID</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;calling&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">img</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="s1">&#39;../assets/images/camera.webp&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">img</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="s1">&#39;30px&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">button</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tr</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">button</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;offline&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">table</span><span class="p">.</span><span class="nx">rows</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//console.log(table.rows[i].cells[0].innerHTML);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">table</span><span class="p">.</span><span class="nx">rows</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">innerHTML</span> <span class="o">==</span> <span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">table</span><span class="p">.</span><span class="nx">deleteRow</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="后端-2">后端</h4>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">Server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;socket.io&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Server</span><span class="p">(</span><span class="nx">httpServer</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cors</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">origin</span><span class="o">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">io</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="nx">L</span><span class="p">.</span><span class="nx">toArray</span><span class="p">(</span><span class="nx">l</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">l</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">append</span><span class="p">({</span> <span class="s1">&#39;sid&#39;</span><span class="o">:</span> <span class="nx">info</span><span class="p">.</span><span class="nx">sid</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="nx">info</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="nx">info</span><span class="p">.</span><span class="nx">name</span> <span class="p">},</span> <span class="nx">l</span><span class="p">);</span><span class="c1">//当io监听到有人登录 将sid、id和名字添加到list
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;online&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;offline&#39;</span><span class="p">,</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">toArray</span><span class="p">(</span><span class="nx">l</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">//监听到有人退出，从列表中把推出的用户信息删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">sid</span> <span class="o">===</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">l</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">l</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;calling&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;calling socket req received!&#39;</span><span class="p">,</span><span class="nx">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;called&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;refuse&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">callingSid</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;refuse&#39;</span><span class="p">,</span> <span class="nx">info</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;agree&#39;</span><span class="p">,</span> <span class="nx">callingSid</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">callingSid</span><span class="o">+</span><span class="sb">`&#39;s invitation has been accepted!`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">callingSid</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;agree&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="通话页面">通话页面</h3>
+</blockquote>
+<blockquote>
+<h4 id="前端-3">前端</h4>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">localVideo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">localStream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">remoteVideo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//用于WebRTC连接的类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">peerConnection</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">uuid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//配置ice服务器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">peerConnectionConfig</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;iceServers&#39;</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="s1">&#39;urls&#39;</span><span class="o">:</span> <span class="s1">&#39;stun:stun.stunprotocol.org:3478&#39;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="s1">&#39;urls&#39;</span><span class="o">:</span> <span class="s1">&#39;stun:stun.l.google.com:19302&#39;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">pageReady</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">uuid</span> <span class="o">=</span> <span class="nx">createUUID</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;this is uuid:&#39;</span><span class="p">,</span><span class="nx">uuid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">localVideo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;localVideo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">remoteVideo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;remoteVideo&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">peerConnection</span><span class="p">)</span> <span class="nx">start</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">signal</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Ignore messages from ourself
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">uuid</span> <span class="o">==</span> <span class="nx">uuid</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`this is signal.uuid:</span><span class="si">${</span><span class="nx">signal</span><span class="p">.</span><span class="nx">uuid</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">setRemoteDescription</span><span class="p">(</span><span class="k">new</span> <span class="nx">RTCSessionDescription</span><span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// Only create answers in response to offers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;offer&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">//如果收到的消息类型是offer请求，则创建一个响应来建立视频会话
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">createAnswer</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">createdDescription</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">ice</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">addIceCandidate</span><span class="p">(</span><span class="k">new</span> <span class="nx">RTCIceCandidate</span><span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">ice</span><span class="p">)).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">constraints</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">video</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">audio</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">mediaDevices</span><span class="p">.</span><span class="nx">getUserMedia</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;yeah your device is ok~&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">navigator</span><span class="p">.</span><span class="nx">mediaDevices</span><span class="p">.</span><span class="nx">getUserMedia</span><span class="p">(</span><span class="nx">constraints</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">getUserMediaSuccess</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Your browser does not support getUserMedia API&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//将得到的视频流赋值给全局变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">getUserMediaSuccess</span><span class="p">(</span><span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">localStream</span> <span class="o">=</span> <span class="nx">stream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">localVideo</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">stream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//前端界面start按钮绑定的事件，若点击start按钮，则执行start函数，传入参数为true，参数名为isCaller
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">start</span><span class="p">(</span><span class="nx">isCaller</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">peerConnection</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RTCPeerConnection</span><span class="p">(</span><span class="nx">peerConnectionConfig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//onicecandidate是一个回调函数，用于监听访问者的ice candidate，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//客户端上传自己的ice candidate，以便stun服务器协助通信
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">onicecandidate</span> <span class="o">=</span> <span class="nx">gotIceCandidate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">ontrack</span> <span class="o">=</span> <span class="nx">gotRemoteStream</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">localStream</span><span class="p">)</span> <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">addStream</span><span class="p">(</span><span class="nx">localStream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//若isCaller的值为true，则执行createOffer函数，向被叫发送视频连接请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">isCaller</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">createOffer</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">createdDescription</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">gotMessageFromServer</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//若peerConnection变量还未创建，说明不是主叫，则通过start函数创建一个peerConnection变量来响应可能到来的offer请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">peerConnection</span><span class="p">)</span> <span class="nx">start</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">signal</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Ignore messages from ourself
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">uuid</span> <span class="o">==</span> <span class="nx">uuid</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">setRemoteDescription</span><span class="p">(</span><span class="k">new</span> <span class="nx">RTCSessionDescription</span><span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// Only create answers in response to offers
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">sdp</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="s1">&#39;offer&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">//如果收到的消息类型是offer请求，则创建一个响应来建立视频会话
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">createAnswer</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">createdDescription</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">ice</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">addIceCandidate</span><span class="p">(</span><span class="k">new</span> <span class="nx">RTCIceCandidate</span><span class="p">(</span><span class="nx">signal</span><span class="p">.</span><span class="nx">ice</span><span class="p">)).</span><span class="k">catch</span><span class="p">(</span><span class="nx">errorHandler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">gotIceCandidate</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">candidate</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;ice&#39;</span><span class="o">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">candidate</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="o">:</span> <span class="nx">uuid</span><span class="p">,</span> <span class="s1">&#39;rooms&#39;</span><span class="o">:</span> <span class="nx">room</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">createdDescription</span><span class="p">(</span><span class="nx">description</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">setLocalDescription</span><span class="p">(</span><span class="nx">description</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="s1">&#39;sdp&#39;</span><span class="o">:</span> <span class="nx">peerConnection</span><span class="p">.</span><span class="nx">localDescription</span><span class="p">,</span> <span class="s1">&#39;uuid&#39;</span><span class="o">:</span> <span class="nx">uuid</span><span class="p">,</span> <span class="s1">&#39;rooms&#39;</span><span class="o">:</span> <span class="nx">room</span> <span class="p">}));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">gotRemoteStream</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;got remote stream&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">remoteVideo</span><span class="p">.</span><span class="nx">srcObject</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">streams</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">remoteVideo</span><span class="p">.</span><span class="nx">srcObject</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">errorHandler</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">alert</span><span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Taken from http://stackoverflow.com/a/105074/515584
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Strictly speaking, it&#39;s not a real UUID, but it gets the job done here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">createUUID</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">s4</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">())</span> <span class="o">*</span> <span class="mh">0x10000</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">).</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">()</span> <span class="o">+</span> <span class="nx">s4</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="后端-3">后端</h4>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Javascript" data-lang="Javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">HTTPS_PORT</span> <span class="o">=</span> <span class="mi">8443</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">serverConfig</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">key</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">&#39;key.pem&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">cert</span><span class="o">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s1">&#39;cert.pem&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ----------------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">https</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;https&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// const httpsServer = https.createServer(serverConfig, handleRequest);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">httpsServer</span> <span class="o">=</span> <span class="nx">https</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">serverConfig</span><span class="p">,</span> <span class="nx">app</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">Server</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">io</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Server</span><span class="p">(</span><span class="nx">httpsServer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//io.listen(httpsServer).sockets;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;../public&#39;</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ----------------------------------------------------------------------------------------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Create a server for handling websocket calls
+</span></span></span><span class="line"><span class="cl"><span class="c1">//const io = new WebSocketServer({ server: httpsServer });
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">os</span><span class="o">=</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">getIpAddress</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">interfaces</span> <span class="o">=</span> <span class="nx">os</span><span class="p">.</span><span class="nx">networkInterfaces</span><span class="p">()</span> <span class="c1">//获取网络接口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">dev</span> <span class="k">in</span> <span class="nx">interfaces</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">iface</span> <span class="o">=</span> <span class="nx">interfaces</span><span class="p">[</span><span class="nx">dev</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">iface</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="p">{</span> <span class="nx">family</span><span class="p">,</span> <span class="nx">address</span><span class="p">,</span> <span class="nx">internal</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">iface</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">dev</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s1">&#39;WLAN&#39;</span><span class="p">)</span><span class="o">!=-</span><span class="mi">1</span><span class="o">&amp;&amp;</span><span class="nx">family</span> <span class="o">===</span> <span class="s1">&#39;IPv4&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">address</span> <span class="o">!==</span> <span class="s1">&#39;127.0.0.1&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">internal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">address</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">ip</span><span class="o">=</span><span class="nx">getIpAddress</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">io</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// const sockets = io.allSockets();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// console.log(sockets);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// const sockets = io.fetchSockets();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// for (const socket of sockets)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">//   console.log(socket.id);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;txt_message&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">message</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket.txt_message triggered in server.js&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">rooms</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;receiveMsg&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;rooms&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">rooms</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">rooms</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">socket</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">rooms</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">socket</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;成功加入&#39;</span> <span class="o">+</span> <span class="nx">message</span><span class="p">.</span><span class="nx">rooms</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="k">in</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">rooms</span><span class="p">).</span><span class="nx">allSockets</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="nx">items</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">items</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">count</span> <span class="o">=</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;disconnect&#34;</span><span class="p">,</span> <span class="kr">async</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">sockets</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">io</span><span class="p">.</span><span class="nx">fetchSockets</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">socket</span> <span class="k">of</span> <span class="nx">sockets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">socket</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,(</span><span class="nx">msg</span><span class="p">)=&gt;{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;server received message event&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">data</span><span class="o">=</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">io</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">rooms</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">,</span><span class="nx">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// console.log(JSON.parse(msg))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">httpsServer</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">HTTPS_PORT</span><span class="p">,</span> <span class="nx">ip</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Server running. Visit https://</span><span class="si">${</span><span class="nx">ip</span><span class="si">}</span><span class="sb">:`</span> <span class="o">+</span> <span class="nx">HTTPS_PORT</span> <span class="o">+</span> <span class="s1">&#39; in Firefox/Chrome&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h2 id="成品效果">成品效果</h2>
+</blockquote>
+<blockquote>
+<h3 id="pc端">pc端</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/login.jpg"
+        data-srcset="/images/Project1/login.jpg, /images/Project1/login.jpg 1.5x, /images/Project1/login.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Project1/login.jpg"
+        title="登录界面" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/interface.jpg"
+        data-srcset="/images/Project1/interface.jpg, /images/Project1/interface.jpg 1.5x, /images/Project1/interface.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Project1/interface.jpg"
+        title="界面" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/pc_called.PNG"
+        data-srcset="/images/Project1/pc_called.PNG, /images/Project1/pc_called.PNG 1.5x, /images/Project1/pc_called.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Project1/pc_called.PNG"
+        title="被呼叫" /></p>
+<blockquote>
+<h3 id="移动端-1">移动端</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/pixel_login.jpg"
+        data-srcset="/images/Project1/pixel_login.jpg, /images/Project1/pixel_login.jpg 1.5x, /images/Project1/pixel_login.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Project1/pixel_login.jpg"
+        title="登录界面1" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/pixel_user_interface.png"
+        data-srcset="/images/Project1/pixel_user_interface.png, /images/Project1/pixel_user_interface.png 1.5x, /images/Project1/pixel_user_interface.png 2x"
+        data-sizes="auto"
+        alt="/images/Project1/pixel_user_interface.png"
+        title="界面1" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/pixel_called.jpg"
+        data-srcset="/images/Project1/pixel_called.jpg, /images/Project1/pixel_called.jpg 1.5x, /images/Project1/pixel_called.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Project1/pixel_called.jpg"
+        title="被呼叫1" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Project1/pixel_chatroom.jpg"
+        data-srcset="/images/Project1/pixel_chatroom.jpg, /images/Project1/pixel_chatroom.jpg 1.5x, /images/Project1/pixel_chatroom.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Project1/pixel_chatroom.jpg"
+        title="通话界面1" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/webrtc_communication/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/webrtc_communication/" data-title="基于局域网的音视频即时聊天客户端及服务器软件设计与开发" data-via="musketeerdt"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/webrtc_communication/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/webrtc_communication/" data-title="基于局域网的音视频即时聊天客户端及服务器软件设计与开发"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/webrtc_communication/" data-title="基于局域网的音视频即时聊天客户端及服务器软件设计与开发"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/webrtc_communication/" data-title="基于局域网的音视频即时聊天客户端及服务器软件设计与开发"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 百度" data-sharer="baidu" data-url="http://example.org/webrtc_communication/" data-title="基于局域网的音视频即时聊天客户端及服务器软件设计与开发"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/jikao/" class="prev" rel="prev" title="2022年西南交通大学计算机与人工智能学院转专业机考试题"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>2022年西南交通大学计算机与人工智能学院转专业机考试题</a></div>
+</div>
+<div id="comments"><div id="fb-root" class="comment"></div>
+            <div
+                class="fb-comments"
+                data-href="http://example.org/webrtc_communication/"
+                data-width="100%"
+                data-numposts="10"
+            ></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://developers.facebook.com/docs/plugins/comments/"></a>Facebook</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.109.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2019 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Septemus</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v5.0&appId=&autoLogAppEvents=1" defer></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/twemoji/twemoji.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/contrib/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":30,"type":"lunr"},"twemoji":true};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

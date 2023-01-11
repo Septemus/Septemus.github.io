@@ -3,9 +3,18 @@
         <title>Septemus&#39;s Blog</title>
         <link>http://example.org/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 12 Sep 2022 17:40:46 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>musketeerdt@gmail.com (Septemus)</managingEditor>
+            <webMaster>musketeerdt@gmail.com (Septemus)</webMaster><lastBuildDate>Mon, 09 Jan 2023 18:33:53 &#43;0800</lastBuildDate>
             <atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>基于局域网的音视频即时聊天客户端及服务器软件设计与开发</title>
+    <link>http://example.org/webrtc_communication/</link>
+    <pubDate>Mon, 09 Jan 2023 18:33:53 &#43;0800</pubDate>
+    <author>Septemus</author>
+    <guid>http://example.org/webrtc_communication/</guid>
+    <description><![CDATA[Warning 此项目成员均为学生，还在开发过程中，因此相比企业级项目而言页面简陋技术落后，望看到这篇文章的高手轻喷。并且如果发现BUG或有改进建议，欢迎]]></description>
+</item>
+<item>
     <title>2022年西南交通大学计算机与人工智能学院转专业机考试题</title>
     <link>http://example.org/jikao/</link>
     <pubDate>Mon, 12 Sep 2022 17:40:46 &#43;0800</pubDate>
