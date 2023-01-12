@@ -4,7 +4,7 @@
 {{< music url="/audio/intuition.mp3" name=intuition artist=salemelise cover="/images/Blade_Runner_Black_Lotus_29_1.webp" autoplay="true">}}
 
 > # Hello World!
-<img src="/images/bladerunner.webp" >
+<!-- <img src="/images/bladerunner.webp" > -->
 
 > ## Thanks for these friends :heart_eyes: !
 
