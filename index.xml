@@ -4,9 +4,19 @@
         <link>https://Septemus.github.io/</link>
         <description>This is my cool site</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>musketeerdt@gmail.com (Septemus)</managingEditor>
-            <webMaster>musketeerdt@gmail.com (Septemus)</webMaster><lastBuildDate>Mon, 09 Jan 2023 18:33:53 &#43;0800</lastBuildDate>
+            <webMaster>musketeerdt@gmail.com (Septemus)</webMaster><lastBuildDate>Sat, 14 Jan 2023 10:57:02 &#43;0800</lastBuildDate>
             <atom:link href="https://Septemus.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>数字电子技术理论笔记</title>
+    <link>https://Septemus.github.io/math_electronic/</link>
+    <pubDate>Sat, 14 Jan 2023 10:57:02 &#43;0800</pubDate>
+    <author>Septemus</author>
+    <guid>https://Septemus.github.io/math_electronic/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/Mathematical_Electronic/intel.jpg" referrerpolicy="no-referrer">
+            </div>Warning 此笔记由我个人整理，因此相比教材可能有出入，如果您发现有错误，欢迎和我联系！ Note 此笔记针对西南交通大学2022-2023学年上半学期开设的数]]></description>
+</item>
+<item>
     <title>基于局域网的音视频即时聊天客户端及服务器软件设计与开发</title>
     <link>https://Septemus.github.io/webrtc_communication/</link>
     <pubDate>Mon, 09 Jan 2023 18:33:53 &#43;0800</pubDate>
