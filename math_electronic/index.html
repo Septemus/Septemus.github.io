@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/Septemus.github.io\/math_electronic\/"
-        },"genre": "posts","wordcount":  6188 ,
+        },"genre": "posts","wordcount":  10013 ,
         "url": "https:\/\/Septemus.github.io\/math_electronic\/","datePublished": "2023-01-14T10:57:02+08:00","dateModified": "2023-01-14T10:57:02+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,8 +103,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数字电子技术理论笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Septemus</a></span>&nbsp;<span class="post-category">included in <a href="/categories/college/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>college</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-14">2023-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6188 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-14">2023-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10013 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -323,12 +323,182 @@
         </li>
         <li><a href="#442-译码器数据分配器">4.4.2 译码器/数据分配器</a>
           <ul>
-            <li><a href="#4421-二进制译码器">4.4.2.1 二进制译码器</a></li>
+            <li><a href="#4421-2线-4线译码器74hc139">4.4.2.1 2线-4线译码器（74HC139）</a></li>
+            <li><a href="#4422-3线-8线译码器74hc138">4.4.2.2 3线-8线译码器（74HC138)</a></li>
+            <li><a href="#4423-应用">4.4.2.3 应用</a></li>
+            <li><a href="#4424-七段显示译码器74hc4511">4.4.2.4 七段显示译码器(74HC4511)</a></li>
           </ul>
         </li>
-        <li><a href="#443-数据选择器">4.4.3 数据选择器</a></li>
-        <li><a href="#444-数值比较器">4.4.4 数值比较器</a></li>
-        <li><a href="#445-算术运算电路">4.4.5 算术运算电路</a></li>
+        <li><a href="#443-数据选择器">4.4.3 数据选择器</a>
+          <ul>
+            <li><a href="#4431-2选1数据选择器">4.4.3.1 2选1数据选择器</a></li>
+            <li><a href="#4432-4选1数据选择器">4.4.3.2 4选1数据选择器</a></li>
+            <li><a href="#4433-8选1数据选择器74hc151">4.4.3.3 8选1数据选择器(74HC151)</a></li>
+            <li><a href="#4434-数据选择器构成查找表lut">4.4.3.4 数据选择器构成查找表LUT</a></li>
+            <li><a href="#4435-利用数据选择器实现函数的一般步骤变量数选通端数">4.4.3.5 利用数据选择器实现函数的一般步骤:（变量数=选通端数）</a></li>
+          </ul>
+        </li>
+        <li><a href="#46-组合逻辑电路的行为级建模">4.6 组合逻辑电路的行为级建模</a></li>
+        <li><a href="#461-if-else语句">4.6.1 if-else语句</a></li>
+        <li><a href="#462-case语句">4.6.2 case语句</a>
+          <ul>
+            <li><a href="#4621">4.6.2.1</a></li>
+            <li><a href="#4622">4.6.2.2</a></li>
+          </ul>
+        </li>
+        <li><a href="#463-for语句">4.6.3 for语句</a></li>
+        <li><a href="#464-条件运算符">4.6.4 条件运算符</a></li>
+        <li><a href="#465-模块化设计方法">4.6.5 模块化设计方法</a>
+          <ul>
+            <li><a href="#4651-四位全加器">4.6.5.1 四位全加器</a>
+              <ul>
+                <li><a href="#46511-半加器">4.6.5.1.1 半加器</a></li>
+                <li><a href="#46512-全加器">4.6.5.1.2 全加器</a></li>
+                <li><a href="#46513-四位全加器">4.6.5.1.3 四位全加器</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#51-双稳态电路">5.1 双稳态电路</a>
+      <ul>
+        <li><a href="#511-基本的双稳态电路">5.1.1 基本的双稳态电路</a></li>
+      </ul>
+    </li>
+    <li><a href="#52-sr锁存器">5.2 SR锁存器</a>
+      <ul>
+        <li><a href="#521-基本sr锁存器">5.2.1 基本SR锁存器</a>
+          <ul>
+            <li><a href="#5211-工作原理">5.2.1.1 工作原理</a></li>
+            <li><a href="#5212-真值表">5.2.1.2 真值表</a></li>
+            <li><a href="#5213-变种">5.2.1.3 变种</a></li>
+            <li><a href="#5214-规律">5.2.1.4 规律</a></li>
+            <li><a href="#5215-运用">5.2.1.5 运用</a></li>
+          </ul>
+        </li>
+        <li><a href="#522-门控sr锁存器">5.2.2 门控SR锁存器</a></li>
+      </ul>
+    </li>
+    <li><a href="#53-d锁存器">5.3 D锁存器</a>
+      <ul>
+        <li><a href="#531-电路结构">5.3.1 电路结构</a></li>
+        <li><a href="#532-逻辑功能">5.3.2 逻辑功能</a></li>
+      </ul>
+    </li>
+    <li><a href="#54-触发器的电路结构和工作原理">5.4 触发器的电路结构和工作原理</a>
+      <ul>
+        <li><a href="#541-d触发器">5.4.1 D触发器</a>
+          <ul>
+            <li><a href="#5411-电路结构">5.4.1.1 电路结构</a></li>
+            <li><a href="#5412-d触发器工作原理">5.4.1.2 D触发器工作原理</a>
+              <ul>
+                <li><a href="#54121-特性表">5.4.1.2.1 特性表</a></li>
+                <li><a href="#54122-特性方程">5.4.1.2.2 特性方程</a></li>
+                <li><a href="#54123-状态图">5.4.1.2.3 状态图</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#542-jk触发器">5.4.2 JK触发器</a>
+          <ul>
+            <li><a href="#5421-工作原理">5.4.2.1 工作原理</a>
+              <ul>
+                <li><a href="#54211-特性表">5.4.2.1.1 特性表</a></li>
+                <li><a href="#54212-特性方程">5.4.2.1.2 特性方程</a></li>
+                <li><a href="#54212-状态转移图">5.4.2.1.2 状态转移图</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#543-t触发器">5.4.3 T触发器</a>
+          <ul>
+            <li><a href="#5431-工作原理">5.4.3.1 工作原理</a>
+              <ul>
+                <li><a href="#54311-特性表">5.4.3.1.1 特性表</a></li>
+                <li><a href="#54312-特性方程">5.4.3.1.2 特性方程</a></li>
+                <li><a href="#54313-状态转移图">5.4.3.1.3 状态转移图</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#544-sr触发器">5.4.4 SR触发器</a>
+          <ul>
+            <li><a href="#5441-特性表">5.4.4.1 特性表</a></li>
+            <li><a href="#5442-特性方程">5.4.4.2 特性方程</a></li>
+            <li><a href="#5443-状态转移图">5.4.4.3 状态转移图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#55-d触发器转换">5.5 D触发器转换</a>
+      <ul>
+        <li><a href="#551-d触发器构成jk触发器">5.5.1 D触发器构成JK触发器</a></li>
+        <li><a href="#552-d触发器构成t触发器">5.5.2 D触发器构成T触发器</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#61-时序逻辑电路的基本概念">6.1 时序逻辑电路的基本概念</a>
+      <ul>
+        <li><a href="#611-时序逻辑电路的模型与分类">6.1.1 时序逻辑电路的模型与分类</a>
+          <ul>
+            <li><a href="#6111-时序电路的基本结构">6.1.1.1 时序电路的基本结构</a></li>
+            <li><a href="#6112-时序逻辑电路的分类">6.1.1.2 时序逻辑电路的分类</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#62-同步-时序逻辑电路的分析">6.2 同步 时序逻辑电路的分析</a>
+      <ul>
+        <li><a href="#621-逻辑方程组">6.2.1 逻辑方程组</a>
+          <ul>
+            <li><a href="#622-表达过程">6.2.2 表达过程</a></li>
+            <li><a href="#6221-例">6.2.2.1 例</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#63-同步-时序逻辑电路的设计">6.3 同步 时序逻辑电路的设计</a>
+      <ul>
+        <li><a href="#631-设计同步时序逻辑电路的一般步骤">6.3.1 设计同步时序逻辑电路的一般步骤</a>
+          <ul>
+            <li><a href="#6311-根据给定的逻辑功能建立原始状态图和原始状态表">6.3.1.1 根据给定的逻辑功能建立原始状态图和原始状态表</a></li>
+            <li><a href="#6312-状态化简-----求出最简状态图">6.3.1.2 状态化简&mdash;&ndash;求出最简状态图</a></li>
+            <li><a href="#6313-状态编码状态分配">6.3.1.3 状态编码（状态分配）</a></li>
+            <li><a href="#6314-选择触发器的类型">6.3.1.4 选择触发器的类型</a></li>
+            <li><a href="#6315-求出电路的激励方程和输出方程">6.3.1.5 求出电路的激励方程和输出方程</a></li>
+            <li><a href="#6316-画出逻辑图并检查自启动能力">6.3.1.6 画出逻辑图并检查自启动能力</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#65-若干典型的时序逻辑电路">6.5 若干典型的时序逻辑电路</a>
+      <ul>
+        <li><a href="#651-寄存器和移位寄存器">6.5.1 寄存器和移位寄存器</a>
+          <ul>
+            <li><a href="#6511-8位cmos寄存器74hc374">6.5.1.1 8位CMOS寄存器74HC374</a></li>
+            <li><a href="#6512-移位寄存器">6.5.1.2 移位寄存器</a>
+              <ul>
+                <li><a href="#65121-基本移位寄存器">6.5.1.2.1 基本移位寄存器</a></li>
+                <li><a href="#65122-多功能双向移位寄存器">6.5.1.2.2 多功能双向移位寄存器</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#652-计数器">6.5.2 计数器</a>
+          <ul>
+            <li><a href="#6521-二进制计数器">6.5.2.1 二进制计数器</a>
+              <ul>
+                <li><a href="#65211-74lvc161">6.5.2.1.1 74LVC161</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -1412,9 +1582,6 @@ $$ L = AB + \bar{A}C + \bar{B}C = AB + ( \bar{A} + \bar{B} ) C = AB + \overline{
 </blockquote>
 <p>译码：译码是编码的逆过程，它能将二进制码翻译成代表某一特定含义的信号.(高低电平信号)</p>
 <p>译码器：具有译码功能的逻辑电路称为译码器。</p>
-<blockquote>
-<h4 id="4421-二进制译码器">4.4.2.1 二进制译码器</h4>
-</blockquote>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1423,9 +1590,9 @@ $$ L = AB + \bar{A}C + \bar{B}C = AB + ( \bar{A} + \bar{B} ) C = AB + \overline{
         data-sizes="auto"
         alt="/images/Mathematical_Electronic/bi_trans.jpg"
         title="bi_trans" /></p>
-<ol>
-<li>
-<p>2线-4线译码器（74HC139）</p>
+<blockquote>
+<h4 id="4421-2线-4线译码器74hc139">4.4.2.1 2线-4线译码器（74HC139）</h4>
+</blockquote>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1434,9 +1601,9 @@ $$ L = AB + \bar{A}C + \bar{B}C = AB + ( \bar{A} + \bar{B} ) C = AB + \overline{
         data-sizes="auto"
         alt="/images/Mathematical_Electronic/2_4trans_anal.jpg"
         title="2_4_anal" /></p>
-</li>
-<li>
-<p>3线-8线译码器（74HC138）</p>
+<blockquote>
+<h4 id="4422-3线-8线译码器74hc138">4.4.2.2 3线-8线译码器（74HC138)</h4>
+</blockquote>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -1453,13 +1620,1570 @@ $$ L = AB + \bar{A}C + \bar{B}C = AB + ( \bar{A} + \bar{B} ) C = AB + \overline{
         data-sizes="auto"
         alt="/images/Mathematical_Electronic/3_8_2.jpg"
         title="3_8_2" /></p>
+<blockquote>
+<h4 id="4423-应用">4.4.2.3 应用</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg19.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg19.jpg, /images/Mathematical_Electronic/eg19.jpg 1.5x, /images/Mathematical_Electronic/eg19.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg19.jpg"
+        title="eg19" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg20.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg20.jpg, /images/Mathematical_Electronic/eg20.jpg 1.5x, /images/Mathematical_Electronic/eg20.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg20.jpg"
+        title="eg20" />
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">$D_i$是$A_i$和$B_i+C_{i-1}$的差关于2的模。<br>
+$C_i$是借位标志。</div>
+        </div>
+    </div>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg21.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg21.jpg, /images/Mathematical_Electronic/eg21.jpg 1.5x, /images/Mathematical_Electronic/eg21.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg21.jpg"
+        title="eg21" /></p>
+<blockquote>
+<h4 id="4424-七段显示译码器74hc4511">4.4.2.4 七段显示译码器(74HC4511)</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg22.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg22.jpg, /images/Mathematical_Electronic/eg22.jpg 1.5x, /images/Mathematical_Electronic/eg22.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg22.jpg"
+        title="eg22" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg23.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg23.jpg, /images/Mathematical_Electronic/eg23.jpg 1.5x, /images/Mathematical_Electronic/eg23.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg23.jpg"
+        title="eg23" /></p>
+<blockquote>
+<h3 id="443-数据选择器">4.4.3 数据选择器</h3>
+</blockquote>
+<p>数据选择器：能实现数据选择功能的逻辑电路。它的作用相当于多个输入的单刀多掷开关，又称“多路开关” 。</p>
+<p>数据选择的功能：在通道选择信号的作用下，将多个通道的数据分时传送到公共的数据通道上去的。</p>
+<blockquote>
+<h4 id="4431-2选1数据选择器">4.4.3.1 2选1数据选择器</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg24.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg24.jpg, /images/Mathematical_Electronic/eg24.jpg 1.5x, /images/Mathematical_Electronic/eg24.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg24.jpg"
+        title="eg24" /></p>
+<blockquote>
+<h4 id="4432-4选1数据选择器">4.4.3.2 4选1数据选择器</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg25.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg25.jpg, /images/Mathematical_Electronic/eg25.jpg 1.5x, /images/Mathematical_Electronic/eg25.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg25.jpg"
+        title="eg25" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg26.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg26.jpg, /images/Mathematical_Electronic/eg26.jpg 1.5x, /images/Mathematical_Electronic/eg26.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg26.jpg"
+        title="eg26" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg27.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg27.jpg, /images/Mathematical_Electronic/eg27.jpg 1.5x, /images/Mathematical_Electronic/eg27.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg27.jpg"
+        title="eg27" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg28.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg28.jpg, /images/Mathematical_Electronic/eg28.jpg 1.5x, /images/Mathematical_Electronic/eg28.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg28.jpg"
+        title="eg28" /></p>
+<blockquote>
+<h4 id="4433-8选1数据选择器74hc151">4.4.3.3 8选1数据选择器(74HC151)</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74hc151.jpg"
+        data-srcset="/images/Mathematical_Electronic/74hc151.jpg, /images/Mathematical_Electronic/74hc151.jpg 1.5x, /images/Mathematical_Electronic/74hc151.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74hc151.jpg"
+        title="74hc151" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74hc151_graph.jpg"
+        data-srcset="/images/Mathematical_Electronic/74hc151_graph.jpg, /images/Mathematical_Electronic/74hc151_graph.jpg 1.5x, /images/Mathematical_Electronic/74hc151_graph.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74hc151_graph.jpg"
+        title="74hc151_g" />
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">L是低电平。<br>
+H是高电平。</div>
+        </div>
+    </div>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg30.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg30.jpg, /images/Mathematical_Electronic/eg30.jpg 1.5x, /images/Mathematical_Electronic/eg30.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg30.jpg"
+        title="eg30" /></p>
+<blockquote>
+<h4 id="4434-数据选择器构成查找表lut">4.4.3.4 数据选择器构成查找表LUT</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/lut1.jpg"
+        data-srcset="/images/Mathematical_Electronic/lut1.jpg, /images/Mathematical_Electronic/lut1.jpg 1.5x, /images/Mathematical_Electronic/lut1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/lut1.jpg"
+        title="lut1" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/lut2.jpg"
+        data-srcset="/images/Mathematical_Electronic/lut2.jpg, /images/Mathematical_Electronic/lut2.jpg 1.5x, /images/Mathematical_Electronic/lut2.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/lut2.jpg"
+        title="lut2" /></p>
+<blockquote>
+<h4 id="4435-利用数据选择器实现函数的一般步骤变量数选通端数">4.4.3.5 利用数据选择器实现函数的一般步骤:（变量数=选通端数）</h4>
+</blockquote>
+<ol>
+<li>将函数变换成最小项表达式</li>
+<li>选择输入信号S2、S1、S0作为函数的输入变量</li>
+<li>处理数据输入D0~D7信号电平。逻辑表达式中有$m_i$ ,则相应$D_i$ =1，其他的数据输入端均为0。当变量数&gt;选通端数，考虑如何将某些变量接入数据端。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg29.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg29.jpg, /images/Mathematical_Electronic/eg29.jpg 1.5x, /images/Mathematical_Electronic/eg29.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg29.jpg"
+        title="eg29" /></li>
+</ol>
+<blockquote>
+<h3 id="46-组合逻辑电路的行为级建模">4.6 组合逻辑电路的行为级建模</h3>
+</blockquote>
+<blockquote>
+<h3 id="461-if-else语句">4.6.1 if-else语句</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/if_eg.jpg"
+        data-srcset="/images/Mathematical_Electronic/if_eg.jpg, /images/Mathematical_Electronic/if_eg.jpg 1.5x, /images/Mathematical_Electronic/if_eg.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/if_eg.jpg"
+        title="if_eg" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">chooser_4</span><span class="p">(</span><span class="nc">S</span><span class="p">,</span><span class="nc">D</span><span class="p">,</span><span class="nc">Y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">1</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">D</span><span class="p">,</span><span class="nc">S</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nc">S</span><span class="o">==</span><span class="mi">2</span><span class="s1">&#39;b00) Y=D[0];
+</span></span></span><span class="line"><span class="cl"><span class="s1">            else if(S==2&#39;</span><span class="nv">b01</span><span class="p">)</span> <span class="nc">Y</span><span class="o">=</span><span class="nc">D</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nc">S</span><span class="o">==</span><span class="mi">2</span><span class="s1">&#39;b10) Y=D[2];
+</span></span></span><span class="line"><span class="cl"><span class="s1">            else Y=D[3];
+</span></span></span><span class="line"><span class="cl"><span class="s1">        end
+</span></span></span><span class="line"><span class="cl"><span class="s1">endmodule
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition warning">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">注意，过程赋值语句只能给寄存器型变量赋值，因此，输出变量Y的数据类型定义为reg。</div>
+        </div>
+    </div>
+<blockquote>
+<h3 id="462-case语句">4.6.2 case语句</h3>
+</blockquote>
+<p><div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">用关键词casex和casez表示含有无关项x和高阻z的情况。</div>
+        </div>
+    </div>
+<div class="details admonition warning">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>Warning<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">当分支项中的语句是多条语句，必须在最前面写上关键词begin，在最后写上关键词end，成为顺序语句块。</div>
+        </div>
+    </div></p>
+<blockquote>
+<h4 id="4621">4.6.2.1</h4>
+</blockquote>
+<p>对具有使能端$E_n$的4选1数据选择器行为进行Verilog描述。当$E_n$=0时，数据选择器工作，$E_n$=1时，禁止工作，输出为0。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">choose_4</span><span class="p">(</span><span class="nc">S</span><span class="p">,</span><span class="nc">D</span><span class="p">,</span><span class="nc">Y</span><span class="p">,</span><span class="nc">E</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">1</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nc">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nc">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nc">E</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">S</span><span class="p">,</span><span class="nc">D</span><span class="p">,</span><span class="nc">E</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nc">E</span><span class="o">==</span><span class="mi">1</span><span class="s1">&#39;b1)
+</span></span></span><span class="line"><span class="cl"><span class="s1">        begin
+</span></span></span><span class="line"><span class="cl"><span class="s1">            case(S)
+</span></span></span><span class="line"><span class="cl"><span class="s1">                2&#39;</span><span class="nv">b00</span><span class="p">:</span><span class="nc">Y</span><span class="o">&lt;=</span><span class="nc">D</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="mi">2</span><span class="s1">&#39;b01:Y&lt;=D[1];
+</span></span></span><span class="line"><span class="cl"><span class="s1">                2&#39;</span><span class="nv">b10</span><span class="p">:</span><span class="nc">Y</span><span class="o">&lt;=</span><span class="nc">D</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="mi">2</span><span class="s1">&#39;b11:Y&lt;=D[3];
+</span></span></span><span class="line"><span class="cl"><span class="s1">            endcase
+</span></span></span><span class="line"><span class="cl"><span class="s1">        end
+</span></span></span><span class="line"><span class="cl"><span class="s1">        else Y&lt;=1&#39;</span><span class="nv">b0</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">end</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h4 id="4622">4.6.2.2</h4>
+</blockquote>
+<p>对基本的4线-2线优先编码器的行为进行Verilog描述。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">coder_4_2</span><span class="p">(</span><span class="nc">I</span><span class="p">,</span><span class="nc">Y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">I</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">I</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">casex</span><span class="p">(</span><span class="nc">I</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">4</span><span class="s1">&#39;b1xxx:Y&lt;=2&#39;</span><span class="nv">b11</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">4</span><span class="s1">&#39;b01xx:Y&lt;=2&#39;</span><span class="nv">b10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">4</span><span class="s1">&#39;b001x:Y&lt;=2&#39;</span><span class="nv">b01</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">4</span><span class="s1">&#39;b0001:Y&lt;=2&#39;</span><span class="nv">b00</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">default</span><span class="p">:</span><span class="nc">Y</span><span class="o">&lt;=</span><span class="mi">2</span><span class="s1">&#39;bx;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        endcase
+</span></span></span><span class="line"><span class="cl"><span class="s1">    end
+</span></span></span><span class="line"><span class="cl"><span class="s1">endmodule
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="463-for语句">4.6.3 for语句</h3>
+</blockquote>
+<p>试用Verilog语言描述具有高电平使能的3线-8线译码器.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">trans_3_8</span><span class="p">(</span><span class="nc">I</span><span class="p">,</span><span class="nc">Y</span><span class="p">,</span><span class="nc">E</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">2</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">I</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nc">E</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">integar</span> <span class="nv">k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">I</span><span class="p">,</span><span class="nc">E</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">Y</span><span class="o">=</span><span class="mi">8</span><span class="s1">&#39;b1111_1111;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        for(k=0;k&lt;8;k=k+1)
+</span></span></span><span class="line"><span class="cl"><span class="s1">        begin
+</span></span></span><span class="line"><span class="cl"><span class="s1">            if(k==I&amp;&amp;E) Y[k]=0;
+</span></span></span><span class="line"><span class="cl"><span class="s1">            else Y[k]=1;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        end
+</span></span></span><span class="line"><span class="cl"><span class="s1">    end
+</span></span></span><span class="line"><span class="cl"><span class="s1">endmodule
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="464-条件运算符">4.6.4 条件运算符</h3>
+</blockquote>
+<p>例：用条件运算符描述了一个2选1的数据选择器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">chooser_2_1</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">1</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nv">sel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">D</span><span class="p">,</span><span class="nv">sel</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">Y</span><span class="o">&lt;=</span><span class="nv">sel</span><span class="kd">?</span><span class="nc">D</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="nc">D</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">end</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">choose_2_1</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">1</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">D</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nv">sel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nc">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">assign</span> <span class="nc">Y</span><span class="o">&lt;=</span><span class="nv">sel</span><span class="kd">?</span><span class="nc">D</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="nc">D</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="465-模块化设计方法">4.6.5 模块化设计方法</h3>
+</blockquote>
+<p>分层次的电路设计:在电路设计中，将两个或多个模块组合起来描述电路逻辑功能的设计方法。</p>
+<p>设计方法：自顶向下和自底向上两种常用的设计方法。</p>
+<blockquote>
+<h4 id="4651-四位全加器">4.6.5.1 四位全加器</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg31.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg31.jpg, /images/Mathematical_Electronic/eg31.jpg 1.5x, /images/Mathematical_Electronic/eg31.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg31.jpg"
+        title="eg31" /></p>
+<blockquote>
+<h5 id="46511-半加器">4.6.5.1.1 半加器</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/half_adder.jpg"
+        data-srcset="/images/Mathematical_Electronic/half_adder.jpg, /images/Mathematical_Electronic/half_adder.jpg 1.5x, /images/Mathematical_Electronic/half_adder.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/half_adder.jpg"
+        title="half_adder" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">half_adder</span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">,</span><span class="nc">S</span><span class="p">,</span><span class="nc">C</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="nc">S</span><span class="p">,</span><span class="nc">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">S</span><span class="o">&lt;=</span><span class="nc">A</span><span class="o">^</span><span class="nc">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nc">C</span><span class="o">&lt;=</span><span class="nc">A</span><span class="o">&amp;</span><span class="nc">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">end</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h5 id="46512-全加器">4.6.5.1.2 全加器</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/full_adder.jpg"
+        data-srcset="/images/Mathematical_Electronic/full_adder.jpg, /images/Mathematical_Electronic/full_adder.jpg 1.5x, /images/Mathematical_Electronic/full_adder.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/full_adder.jpg"
+        title="full_adder" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">full_adder</span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">,</span><span class="nc">Ci</span><span class="p">,</span><span class="nc">S</span><span class="p">,</span><span class="nc">C0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">,</span><span class="nc">Ci</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nc">S</span><span class="p">,</span><span class="nc">C0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">wire</span> <span class="nc">S1</span><span class="p">,</span><span class="nc">D1</span><span class="p">,</span><span class="nc">D2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">half_adder</span> <span class="nc">HA1</span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">,</span><span class="nc">S1</span><span class="p">,</span><span class="nc">D1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">half_adder</span> <span class="nc">HA2</span><span class="p">(</span><span class="nc">S1</span><span class="p">,</span><span class="nc">Ci</span><span class="p">,</span><span class="nc">S</span><span class="p">,</span><span class="nc">D2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">or</span><span class="p">(</span><span class="nc">C0</span><span class="p">,</span><span class="nc">D1</span><span class="p">,</span><span class="nc">D2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h5 id="46513-四位全加器">4.6.5.1.3 四位全加器</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/4badd.jpg"
+        data-srcset="/images/Mathematical_Electronic/4badd.jpg, /images/Mathematical_Electronic/4badd.jpg 1.5x, /images/Mathematical_Electronic/4badd.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/4badd.jpg"
+        title="4badd" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">adder_4_dig</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">A</span><span class="p">,</span><span class="nc">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nc">CI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">S</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nc">CO</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">wire</span> <span class="p">[</span><span class="err">2</span><span class="p">:</span><span class="s">0</span><span class="p">]</span><span class="nc">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">full_adder</span> <span class="nf">fa0</span><span class="p">(</span><span class="nc">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nc">B</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nc">CI</span><span class="p">,</span><span class="nc">S</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">full_adder</span> <span class="nf">fa1</span><span class="p">(</span><span class="nc">A</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nc">B</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nc">S</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">full_adder</span> <span class="nf">fa2</span><span class="p">(</span><span class="nc">A</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="nc">B</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nc">S</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">full_adder</span> <span class="nf">fa3</span><span class="p">(</span><span class="nc">A</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="nc">B</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="nc">C</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="nc">S</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="nc">CO</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h1 id="5-锁存器和触发器">5 锁存器和触发器</h1>
+</blockquote>
+<blockquote>
+<h2 id="51-双稳态电路">5.1 双稳态电路</h2>
+</blockquote>
+<blockquote>
+<h3 id="511-基本的双稳态电路">5.1.1 基本的双稳态电路</h3>
+</blockquote>
+<p>双稳态电路是锁存器和触发器的结构组成、功能实现的基础.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/bi_stable.jpg"
+        data-srcset="/images/Mathematical_Electronic/bi_stable.jpg, /images/Mathematical_Electronic/bi_stable.jpg 1.5x, /images/Mathematical_Electronic/bi_stable.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/bi_stable.jpg"
+        title="bi_stable" /></p>
+<blockquote>
+<h2 id="52-sr锁存器">5.2 SR锁存器</h2>
+</blockquote>
+<blockquote>
+<h3 id="521-基本sr锁存器">5.2.1 基本SR锁存器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr1.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr1.jpg, /images/Mathematical_Electronic/sr1.jpg 1.5x, /images/Mathematical_Electronic/sr1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr1.jpg"
+        title="sr1" /></p>
+<blockquote>
+<h4 id="5211-工作原理">5.2.1.1 工作原理</h4>
+</blockquote>
+<ol>
+<li></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr2.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr2.jpg, /images/Mathematical_Electronic/sr2.jpg 1.5x, /images/Mathematical_Electronic/sr2.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr2.jpg"
+        title="sr2" /></p>
+<ol start="2">
+<li></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr3.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr3.jpg, /images/Mathematical_Electronic/sr3.jpg 1.5x, /images/Mathematical_Electronic/sr3.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr3.jpg"
+        title="sr3" /></p>
+<ol start="3">
+<li></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr4.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr4.jpg, /images/Mathematical_Electronic/sr4.jpg 1.5x, /images/Mathematical_Electronic/sr4.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr4.jpg"
+        title="sr4" /></p>
+<ol start="4">
+<li></li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr5.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr5.jpg, /images/Mathematical_Electronic/sr5.jpg 1.5x, /images/Mathematical_Electronic/sr5.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr5.jpg"
+        title="sr5" /></p>
+<blockquote>
+<h4 id="5212-真值表">5.2.1.2 真值表</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr6.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr6.jpg, /images/Mathematical_Electronic/sr6.jpg 1.5x, /images/Mathematical_Electronic/sr6.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr6.jpg"
+        title="sr6" /></p>
+<blockquote>
+<h4 id="5213-变种">5.2.1.3 变种</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr7.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr7.jpg, /images/Mathematical_Electronic/sr7.jpg 1.5x, /images/Mathematical_Electronic/sr7.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr7.jpg"
+        title="sr7" /></p>
+<blockquote>
+<h4 id="5214-规律">5.2.1.4 规律</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr8.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr8.jpg, /images/Mathematical_Electronic/sr8.jpg 1.5x, /images/Mathematical_Electronic/sr8.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr8.jpg"
+        title="sr8" /></p>
+<blockquote>
+<h4 id="5215-运用">5.2.1.5 运用</h4>
+</blockquote>
+<p>运用基本SR锁存器消除机械开关触点抖动引起的脉冲输出。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr9.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr9.jpg, /images/Mathematical_Electronic/sr9.jpg 1.5x, /images/Mathematical_Electronic/sr9.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr9.jpg"
+        title="sr9" /></p>
+<blockquote>
+<h3 id="522-门控sr锁存器">5.2.2 门控SR锁存器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/ensr.jpg"
+        data-srcset="/images/Mathematical_Electronic/ensr.jpg, /images/Mathematical_Electronic/ensr.jpg 1.5x, /images/Mathematical_Electronic/ensr.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/ensr.jpg"
+        title="ensr" /></p>
+<blockquote>
+<h2 id="53-d锁存器">5.3 D锁存器</h2>
+<h3 id="531-电路结构">5.3.1 电路结构</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/D1.jpg"
+        data-srcset="/images/Mathematical_Electronic/D1.jpg, /images/Mathematical_Electronic/D1.jpg 1.5x, /images/Mathematical_Electronic/D1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/D1.jpg"
+        title="D1" />
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">没有圆圈的一侧是高电平的时候TG就是通路。</div>
+        </div>
+    </div></p>
+<blockquote>
+<h3 id="532-逻辑功能">5.3.2 逻辑功能</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/d_func.jpg"
+        data-srcset="/images/Mathematical_Electronic/d_func.jpg, /images/Mathematical_Electronic/d_func.jpg 1.5x, /images/Mathematical_Electronic/d_func.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/d_func.jpg"
+        title="d_func" /></p>
+<blockquote>
+<h2 id="54-触发器的电路结构和工作原理">5.4 触发器的电路结构和工作原理</h2>
+</blockquote>
+<p>共同点：</p>
+<p>具有0 和1两个稳定状态，一旦状态被确定，就能自行保持。一个锁存器或触发器能存储一位二进制码。</p>
+<p>不同点：</p>
+<p>锁存器&mdash;对脉冲电平敏感的存储电路，在特定输入脉冲电平作用下改变状态。</p>
+<p>触发器&mdash;对脉冲边沿敏感的存储电路，在时钟脉冲的上升沿或下降沿的变化瞬间改变状态</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/triggers.jpg"
+        data-srcset="/images/Mathematical_Electronic/triggers.jpg, /images/Mathematical_Electronic/triggers.jpg 1.5x, /images/Mathematical_Electronic/triggers.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/triggers.jpg"
+        title="triggers" /></p>
+<blockquote>
+<h3 id="541-d触发器">5.4.1 D触发器</h3>
+</blockquote>
+<blockquote>
+<h4 id="5411-电路结构">5.4.1.1 电路结构</h4>
+</blockquote>
+<p>两个D锁存器级联构成一个主从D触发器</p>
+<p>主锁存器与从锁存器结构相同(但使能信号相反)</p>
+<p>TG1和TG4的工作状态相同</p>
+<p>TG2和TG3的工作状态相同</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/locker1.jpg"
+        data-srcset="/images/Mathematical_Electronic/locker1.jpg, /images/Mathematical_Electronic/locker1.jpg 1.5x, /images/Mathematical_Electronic/locker1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/locker1.jpg"
+        title="locker1" /></p>
+<blockquote>
+<h4 id="5412-d触发器工作原理">5.4.1.2 D触发器工作原理</h4>
+</blockquote>
+<ol>
+<li>
+<p>CP=0时：</p>
+<p>TG1导通，TG2断开——输入信号D 送入主锁存器。</p>
+<p>Q&rsquo;跟随D端的状态变化，使Q&rsquo;=D</p>
+<p>TG3断开，TG4导通——从锁存器维持在原来的状态不变。</p>
+</li>
+<li>
+<p>CP=1时：</p>
+<p>TG1断开，TG2导通——输入信号D 不能送入主锁存器。主锁存器维持原态不变。</p>
+<p>TG3导通，TG4断开——主锁存器Q&rsquo;的信号送从锁存器Q端。使Q=D。</p>
+<p>触发器的状态仅仅取决于CP信号上升沿到达前瞬间的D信号！</p>
 </li>
 </ol>
 <blockquote>
-<h3 id="443-数据选择器">4.4.3 数据选择器</h3>
-<h3 id="444-数值比较器">4.4.4 数值比较器</h3>
-<h3 id="445-算术运算电路">4.4.5 算术运算电路</h3>
+<h5 id="54121-特性表">5.4.1.2.1 特性表</h5>
 </blockquote>
+<table>
+<thead>
+<tr>
+<th>D</th>
+<th>$Q_n$</th>
+<th>$Q_{n+1}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h5 id="54122-特性方程">5.4.1.2.2 特性方程</h5>
+</blockquote>
+<p>$$ Q^{n+1} = D $$</p>
+<blockquote>
+<h5 id="54123-状态图">5.4.1.2.3 状态图</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/d_pic.jpg"
+        data-srcset="/images/Mathematical_Electronic/d_pic.jpg, /images/Mathematical_Electronic/d_pic.jpg 1.5x, /images/Mathematical_Electronic/d_pic.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/d_pic.jpg"
+        title="d_pic" /></p>
+<blockquote>
+<h3 id="542-jk触发器">5.4.2 JK触发器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/jk_trigger.jpg"
+        data-srcset="/images/Mathematical_Electronic/jk_trigger.jpg, /images/Mathematical_Electronic/jk_trigger.jpg 1.5x, /images/Mathematical_Electronic/jk_trigger.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/jk_trigger.jpg"
+        title="jk_trigger" /></p>
+<div class="details admonition tip">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>Tip<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">本质上JK触发器就是升级版的SR触发器，多了个翻转功能。</div>
+        </div>
+    </div>
+<blockquote>
+<h4 id="5421-工作原理">5.4.2.1 工作原理</h4>
+</blockquote>
+<blockquote>
+<h5 id="54211-特性表">5.4.2.1.1 特性表</h5>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>J</th>
+<th>K</th>
+<th>$Q_n$</th>
+<th>$Q_{n+1}$</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>保持</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>保持</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>置0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>置0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>置1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>置1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>翻转</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>翻转</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h5 id="54212-特性方程">5.4.2.1.2 特性方程</h5>
+</blockquote>
+<p>$$ Q_{n+1} = J\overline{ Q_{n} } + \overline{K}Q_{n} $$</p>
+<blockquote>
+<h5 id="54212-状态转移图">5.4.2.1.2 状态转移图</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/jk_pic.jpg"
+        data-srcset="/images/Mathematical_Electronic/jk_pic.jpg, /images/Mathematical_Electronic/jk_pic.jpg 1.5x, /images/Mathematical_Electronic/jk_pic.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/jk_pic.jpg"
+        title="jk_pic" /></p>
+<blockquote>
+<h3 id="543-t触发器">5.4.3 T触发器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/T_trigger.jpg"
+        data-srcset="/images/Mathematical_Electronic/T_trigger.jpg, /images/Mathematical_Electronic/T_trigger.jpg 1.5x, /images/Mathematical_Electronic/T_trigger.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/T_trigger.jpg"
+        title="T_trigger" /></p>
+<blockquote>
+<h4 id="5431-工作原理">5.4.3.1 工作原理</h4>
+</blockquote>
+<blockquote>
+<h5 id="54311-特性表">5.4.3.1.1 特性表</h5>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>T</th>
+<th>Qn</th>
+<th>Qn+1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h5 id="54312-特性方程">5.4.3.1.2 特性方程</h5>
+</blockquote>
+<p>$$ Q_{n+1} = T\overline{ Q_{n} } + \overline{T}Q_{n} $$</p>
+<blockquote>
+<h5 id="54313-状态转移图">5.4.3.1.3 状态转移图</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/t_pic.jpg"
+        data-srcset="/images/Mathematical_Electronic/t_pic.jpg, /images/Mathematical_Electronic/t_pic.jpg 1.5x, /images/Mathematical_Electronic/t_pic.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/t_pic.jpg"
+        title="t_pic" /></p>
+<blockquote>
+<h3 id="544-sr触发器">5.4.4 SR触发器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr_trigger.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr_trigger.jpg, /images/Mathematical_Electronic/sr_trigger.jpg 1.5x, /images/Mathematical_Electronic/sr_trigger.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr_trigger.jpg"
+        title="sr_trigger" /></p>
+<blockquote>
+<h4 id="5441-特性表">5.4.4.1 特性表</h4>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Qn</th>
+<th>S</th>
+<th>R</th>
+<th>Qn+1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>x</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h4 id="5442-特性方程">5.4.4.2 特性方程</h4>
+</blockquote>
+<p>$$Q_{n+1} = S + R\overline{ Q_{n} }$$
+$$ SR = 0 $$</p>
+<blockquote>
+<h4 id="5443-状态转移图">5.4.4.3 状态转移图</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sr_pic.jpg"
+        data-srcset="/images/Mathematical_Electronic/sr_pic.jpg, /images/Mathematical_Electronic/sr_pic.jpg 1.5x, /images/Mathematical_Electronic/sr_pic.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sr_pic.jpg"
+        title="sr_pic" /></p>
+<blockquote>
+<h2 id="55-d触发器转换">5.5 D触发器转换</h2>
+</blockquote>
+<blockquote>
+<h3 id="551-d触发器构成jk触发器">5.5.1 D触发器构成JK触发器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/d2jk.jpg"
+        data-srcset="/images/Mathematical_Electronic/d2jk.jpg, /images/Mathematical_Electronic/d2jk.jpg 1.5x, /images/Mathematical_Electronic/d2jk.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/d2jk.jpg"
+        title="d2jk" /></p>
+<blockquote>
+<h3 id="552-d触发器构成t触发器">5.5.2 D触发器构成T触发器</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/d2t.jpg"
+        data-srcset="/images/Mathematical_Electronic/d2t.jpg, /images/Mathematical_Electronic/d2t.jpg 1.5x, /images/Mathematical_Electronic/d2t.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/d2t.jpg"
+        title="d2t" /></p>
+<blockquote>
+<h1 id="6-时序逻辑电路">6 时序逻辑电路</h1>
+</blockquote>
+<p>时序逻辑电路的工作特点是任意时刻的输出状态不仅与该当前的输入信号有关，而且与此前电路的状态有关。</p>
+<blockquote>
+<h2 id="61-时序逻辑电路的基本概念">6.1 时序逻辑电路的基本概念</h2>
+</blockquote>
+<blockquote>
+<h3 id="611-时序逻辑电路的模型与分类">6.1.1 时序逻辑电路的模型与分类</h3>
+</blockquote>
+<blockquote>
+<h4 id="6111-时序电路的基本结构">6.1.1.1 时序电路的基本结构</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/time_circuit.jpg"
+        data-srcset="/images/Mathematical_Electronic/time_circuit.jpg, /images/Mathematical_Electronic/time_circuit.jpg 1.5x, /images/Mathematical_Electronic/time_circuit.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/time_circuit.jpg"
+        title="time_circuit" /></p>
+<blockquote>
+<h4 id="6112-时序逻辑电路的分类">6.1.1.2 时序逻辑电路的分类</h4>
+</blockquote>
+<p>按状态变化分类：</p>
+<ol>
+<li>同步时序电路:电路状态的变化在同一时钟脉冲作用下发生，即存储电路里所有触发器有一个统一的时钟源，它们的状态在同一时刻更新。</li>
+<li>异步时序电路:没有统一的时钟脉冲或没有时钟脉冲，电路的状态更新不是同时发生的。</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/classfication2.jpg"
+        data-srcset="/images/Mathematical_Electronic/classfication2.jpg, /images/Mathematical_Electronic/classfication2.jpg 1.5x, /images/Mathematical_Electronic/classfication2.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/classfication2.jpg"
+        title="classfication2" /></p>
+<p>按输出信号分类：</p>
+<ol>
+<li>米利（Mealy）型时序电路:电路的输出是输入变量及触发器输出Q1、Q0 的函数，这类时序电路亦称为米利型电路</li>
+<li>穆尔（ Moore）型时序电路:电路输出仅仅取决于各触发器的状态，而不受电路当时的输入信号影响或没有输入变量，这类电路称为穆尔型电路</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/classfication1.jpg"
+        data-srcset="/images/Mathematical_Electronic/classfication1.jpg, /images/Mathematical_Electronic/classfication1.jpg 1.5x, /images/Mathematical_Electronic/classfication1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/classfication1.jpg"
+        title="classfication1" /></p>
+<blockquote>
+<h2 id="62-同步-时序逻辑电路的分析">6.2 同步 时序逻辑电路的分析</h2>
+</blockquote>
+<blockquote>
+<h3 id="621-逻辑方程组">6.2.1 逻辑方程组</h3>
+</blockquote>
+<p>输出方程: $O＝f_1(I,S)$</p>
+<p>表达输出信号与输入信号、状态变量的关系式</p>
+<p>激励方程: $E＝f_2(I,S)$</p>
+<p>表达了激励信号与输入信号、状态变量的关系式</p>
+<p>状态方程: $S^{n+1}＝f_3(E,S^n)$</p>
+<p>表达存储电路从现态到次态的转换关系式</p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">状态方程是由激励方程和所用的触发器的类型决定的</div>
+        </div>
+    </div>
+<blockquote>
+<h4 id="622-表达过程">6.2.2 表达过程</h4>
+</blockquote>
+<ol>
+<li>列出逻辑方程组</li>
+<li>根据方程组列出状态转换真值表</li>
+<li>将状态转换真值表化为转换表</li>
+<li>根据转换表得状态表</li>
+<li>根据状态表画状态转移图</li>
+</ol>
+<blockquote>
+<h4 id="6221-例">6.2.2.1 例</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg32.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg32.jpg, /images/Mathematical_Electronic/eg32.jpg 1.5x, /images/Mathematical_Electronic/eg32.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg32.jpg"
+        title="eg32" /></p>
+<ol>
+<li>
+<p>列出逻辑方程组：</p>
+<ul>
+<li>
+<p>输出方程：$$X = Q_0\overline{ Q_1 }$$
+$$Y = \overline{A} ( Q_0 + Q_1 ) $$</p>
+</li>
+<li>
+<p>激励方程：$$ D_0 = A ( Q_0 + Q_1 ) $$
+$$ D_1 = A \overline{Q_0} $$</p>
+</li>
+<li>
+<p>状态方程：
+$$
+Q^{n+1}_{0} = A ( Q^{n}_0 + Q^{n}_1 )
+$$</p>
+<p>$$
+Q_{1}^{n+1} = A \overline{ Q_{0}^{n} }
+$$</p>
+</li>
+</ul>
+</li>
+<li>
+<p>根据方程组列出状态转换真值表:</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>$Q_0^n$</th>
+<th>$Q_1^n$</th>
+<th>$Q_0^{n+1}$</th>
+<th>$Q_1^{n+1}$</th>
+<th>X</th>
+<th>Y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>将状态转换真值表化为转换表</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg33.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg33.jpg, /images/Mathematical_Electronic/eg33.jpg 1.5x, /images/Mathematical_Electronic/eg33.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg33.jpg"
+        title="eg33" /></p>
+<ol start="4">
+<li>根据转换表得状态表</li>
+</ol>
+<p>令$S^n$为$Q_0^nQ_1^n$，$S^{n+1}$为$Q_0^{n+1}Q_0^{n+1}$，4个状态为00=a，01=b，10=c，11=d，得：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg34.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg34.jpg, /images/Mathematical_Electronic/eg34.jpg 1.5x, /images/Mathematical_Electronic/eg34.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg34.jpg"
+        title="eg34" /></p>
+<ol start="5">
+<li>根据状态表画状态转移图</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg35.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg35.jpg, /images/Mathematical_Electronic/eg35.jpg 1.5x, /images/Mathematical_Electronic/eg35.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg35.jpg"
+        title="eg35" /></p>
+<blockquote>
+<h2 id="63-同步-时序逻辑电路的设计">6.3 同步 时序逻辑电路的设计</h2>
+</blockquote>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">同步时序逻辑电路的设计是分析的逆过程,其任务是根据实际逻辑问题的要求，设计出能实现给定逻辑功能的电路。</div>
+        </div>
+    </div>
+<blockquote>
+<h3 id="631-设计同步时序逻辑电路的一般步骤">6.3.1 设计同步时序逻辑电路的一般步骤</h3>
+</blockquote>
+<blockquote>
+<h4 id="6311-根据给定的逻辑功能建立原始状态图和原始状态表">6.3.1.1 根据给定的逻辑功能建立原始状态图和原始状态表</h4>
+</blockquote>
+<ol>
+<li>明确电路的输入条件和相应的输出要求，分别确定输入变量和输出变量的数目和符号。</li>
+<li>找出所有可能的状态和状态转换之间的关系。</li>
+<li>根据原始状态图建立原始状态表。</li>
+</ol>
+<blockquote>
+<h4 id="6312-状态化简-----求出最简状态图">6.3.1.2 状态化简&mdash;&ndash;求出最简状态图</h4>
+</blockquote>
+<p>合并等价状态，消去多余状态的过程称为状态化简</p>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">等价状态：在相同的输入下有相同的输出，并转换到同一个次态去的两个状态称为等价状态。</div>
+        </div>
+    </div>
+<blockquote>
+<h4 id="6313-状态编码状态分配">6.3.1.3 状态编码（状态分配）</h4>
+</blockquote>
+<p>给每个状态赋以二进制代码的过程。</p>
+<p>$2^{n-1}$ &lt; M $\leq 2^n$ （M:状态数;n:触发器的个数）</p>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">状态编码的位数即为触发器的个数</div>
+        </div>
+    </div>
+<blockquote>
+<h4 id="6314-选择触发器的类型">6.3.1.4 选择触发器的类型</h4>
+<h4 id="6315-求出电路的激励方程和输出方程">6.3.1.5 求出电路的激励方程和输出方程</h4>
+<h4 id="6316-画出逻辑图并检查自启动能力">6.3.1.6 画出逻辑图并检查自启动能力</h4>
+</blockquote>
+<blockquote>
+<h2 id="65-若干典型的时序逻辑电路">6.5 若干典型的时序逻辑电路</h2>
+</blockquote>
+<blockquote>
+<h3 id="651-寄存器和移位寄存器">6.5.1 寄存器和移位寄存器</h3>
+</blockquote>
+<p>在数字电路系统中，把需要处理的二进制数据或代码暂时存储起来，以便在需要的时候随时取用，这样的操作叫做寄存</p>
+<blockquote>
+<h4 id="6511-8位cmos寄存器74hc374">6.5.1.1 8位CMOS寄存器74HC374</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74HC374.jpg"
+        data-srcset="/images/Mathematical_Electronic/74HC374.jpg, /images/Mathematical_Electronic/74HC374.jpg 1.5x, /images/Mathematical_Electronic/74HC374.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74HC374.jpg"
+        title="74HC374" /></p>
+<blockquote>
+<h4 id="6512-移位寄存器">6.5.1.2 移位寄存器</h4>
+</blockquote>
+<p>移位寄存器是既能寄存数码，又能在时钟脉冲的作用下使数码在高低位之间移动的逻辑功能部件。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/reg_classfication.jpg"
+        data-srcset="/images/Mathematical_Electronic/reg_classfication.jpg, /images/Mathematical_Electronic/reg_classfication.jpg 1.5x, /images/Mathematical_Electronic/reg_classfication.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/reg_classfication.jpg"
+        title="reg_classfication" /></p>
+<blockquote>
+<h5 id="65121-基本移位寄存器">6.5.1.2.1 基本移位寄存器</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/move_reg.jpg"
+        data-srcset="/images/Mathematical_Electronic/move_reg.jpg, /images/Mathematical_Electronic/move_reg.jpg 1.5x, /images/Mathematical_Electronic/move_reg.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/move_reg.jpg"
+        title="move_reg" /></p>
+<blockquote>
+<h5 id="65122-多功能双向移位寄存器">6.5.1.2.2 多功能双向移位寄存器</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74HC194.jpg"
+        data-srcset="/images/Mathematical_Electronic/74HC194.jpg, /images/Mathematical_Electronic/74HC194.jpg 1.5x, /images/Mathematical_Electronic/74HC194.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74HC194.jpg"
+        title="74hc194" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74hc194_tab.jpg"
+        data-srcset="/images/Mathematical_Electronic/74hc194_tab.jpg, /images/Mathematical_Electronic/74hc194_tab.jpg 1.5x, /images/Mathematical_Electronic/74hc194_tab.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74hc194_tab.jpg"
+        title="74hc194_tab" /></p>
+<blockquote>
+<h3 id="652-计数器">6.5.2 计数器</h3>
+</blockquote>
+<p>计数器的基本功能是对输入时钟脉冲进行计数。它也可用于分频、定时、产生节拍脉冲和脉冲序列及进行数字运算等等。</p>
+<blockquote>
+<h4 id="6521-二进制计数器">6.5.2.1 二进制计数器</h4>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/binary_counter.jpg"
+        data-srcset="/images/Mathematical_Electronic/binary_counter.jpg, /images/Mathematical_Electronic/binary_counter.jpg 1.5x, /images/Mathematical_Electronic/binary_counter.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/binary_counter.jpg"
+        title="bi_cnt" /></p>
+<div class="details admonition note">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">$Q_0$在每个CP都翻转一次，$FF_0$可采用T=1的T触发器。<br>
+$Q_1$仅在$Q_0$=1后的下一个CP到来时翻转，$FF_1$可采用T= $Q_0$的T触发器。<br>
+$Q_2$仅在$Q_0$=$Q_1$=1后的下一个CP到来时翻转。$FF_2$可采用T= $Q_0Q_1$的T触发器。<br>
+$Q_3$仅在$Q_0$=$Q_1$=$Q_2$=1后的下一个CP到来时翻转。$FF_3$可采用T= $Q_0Q_1Q_2$的T触发器。</div>
+        </div>
+    </div>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/4d_bi_cnt.jpg"
+        data-srcset="/images/Mathematical_Electronic/4d_bi_cnt.jpg, /images/Mathematical_Electronic/4d_bi_cnt.jpg 1.5x, /images/Mathematical_Electronic/4d_bi_cnt.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/4d_bi_cnt.jpg"
+        title="4d_bi_cnt" /></p>
+<blockquote>
+<h5 id="65211-74lvc161">6.5.2.1.1 74LVC161</h5>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/4d_bi_cnt1.jpg"
+        data-srcset="/images/Mathematical_Electronic/4d_bi_cnt1.jpg, /images/Mathematical_Electronic/4d_bi_cnt1.jpg 1.5x, /images/Mathematical_Electronic/4d_bi_cnt1.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/4d_bi_cnt1.jpg"
+        title="4d_bi_cnt1" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/74LVC161.PNG"
+        data-srcset="/images/Mathematical_Electronic/74LVC161.PNG, /images/Mathematical_Electronic/74LVC161.PNG 1.5x, /images/Mathematical_Electronic/74LVC161.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/74LVC161.PNG"
+        title="74LVC161" /></p>
+<p>用74LVC161构成九进制加计数器:</p>
+<ol>
+<li>
+<p>反馈清零法：利用异步置零输入端，在M进制计数器的计数过程中，跳过M-N个状态，得到N进制计数器的方法。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/9D74LVC161.PNG"
+        data-srcset="/images/Mathematical_Electronic/9D74LVC161.PNG, /images/Mathematical_Electronic/9D74LVC161.PNG 1.5x, /images/Mathematical_Electronic/9D74LVC161.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/9D74LVC161.PNG"
+        title="9D74LVC161" /></p>
+</li>
+<li>
+<p>反馈置数法:利用同步置数端，在M进制计数器的计数过程中，跳过M-N个状态，得到N进制计数器的方法。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/9D74LVC161_1.PNG"
+        data-srcset="/images/Mathematical_Electronic/9D74LVC161_1.PNG, /images/Mathematical_Electronic/9D74LVC161_1.PNG 1.5x, /images/Mathematical_Electronic/9D74LVC161_1.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/9D74LVC161_1.PNG"
+        title="9D74LVC161_1" /></p>
+</li>
+</ol>
+<p>用74VC161组成256进制计数器:</p>
+<ol>
+<li>
+<p>并行进位：低位片的进位作为高位片的使能</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/256cnt1.PNG"
+        data-srcset="/images/Mathematical_Electronic/256cnt1.PNG, /images/Mathematical_Electronic/256cnt1.PNG 1.5x, /images/Mathematical_Electronic/256cnt1.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/256cnt1.PNG"
+        title="256cnt1" /></p>
+</li>
+<li>
+<p>串行进位：低位片的进位作为高位片的时钟</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/256cnt2.PNG"
+        data-srcset="/images/Mathematical_Electronic/256cnt2.PNG, /images/Mathematical_Electronic/256cnt2.PNG 1.5x, /images/Mathematical_Electronic/256cnt2.PNG 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/256cnt2.PNG"
+        title="256cnt2" /></p>
+</li>
+</ol>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">如果不加反相器，00001110的下个状态不再是00001111而是00011111。加了反相器使得00001110的下个状态时00001111，然后00001111的下个状态是00010000。</div>
+        </div>
+    </div>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

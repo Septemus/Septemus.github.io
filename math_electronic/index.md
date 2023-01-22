@@ -544,19 +544,658 @@ endmodule
 
 译码器：具有译码功能的逻辑电路称为译码器。
 
-> #### 4.4.2.1 二进制译码器
-
 ![bi_trans](/images/Mathematical_Electronic/bi_trans.jpg)
-1. 2线-4线译码器（74HC139）
+> #### 4.4.2.1 2线-4线译码器（74HC139）
+![2_4_anal](/images/Mathematical_Electronic/2_4trans_anal.jpg)
 
-    ![2_4_anal](/images/Mathematical_Electronic/2_4trans_anal.jpg)
+> #### 4.4.2.2 3线-8线译码器（74HC138)
+![3_8_1](/images/Mathematical_Electronic/3_8_1.jpg)
+![3_8_2](/images/Mathematical_Electronic/3_8_2.jpg)
 
-2. 3线-8线译码器（74HC138）
+> #### 4.4.2.3 应用
+![eg19](/images/Mathematical_Electronic/eg19.jpg)
+![eg20](/images/Mathematical_Electronic/eg20.jpg)
+{{< admonition type=info title="" open=false >}}
+$D_i$是$A_i$和$B_i+C_{i-1}$的差关于2的模。  
+$C_i$是借位标志。
+{{< /admonition >}}
+![eg21](/images/Mathematical_Electronic/eg21.jpg)
 
-    ![3_8_1](/images/Mathematical_Electronic/3_8_1.jpg)
-    ![3_8_2](/images/Mathematical_Electronic/3_8_2.jpg)
+> #### 4.4.2.4 七段显示译码器(74HC4511)
+![eg22](/images/Mathematical_Electronic/eg22.jpg)
+![eg23](/images/Mathematical_Electronic/eg23.jpg)
+
 
 
 > ### 4.4.3 数据选择器
-> ### 4.4.4 数值比较器
-> ### 4.4.5 算术运算电路
+数据选择器：能实现数据选择功能的逻辑电路。它的作用相当于多个输入的单刀多掷开关，又称“多路开关” 。  
+
+数据选择的功能：在通道选择信号的作用下，将多个通道的数据分时传送到公共的数据通道上去的。
+
+> #### 4.4.3.1 2选1数据选择器
+
+![eg24](/images/Mathematical_Electronic/eg24.jpg)
+
+> #### 4.4.3.2 4选1数据选择器
+
+![eg25](/images/Mathematical_Electronic/eg25.jpg)
+![eg26](/images/Mathematical_Electronic/eg26.jpg)
+![eg27](/images/Mathematical_Electronic/eg27.jpg)
+![eg28](/images/Mathematical_Electronic/eg28.jpg)
+
+> #### 4.4.3.3 8选1数据选择器(74HC151)
+
+![74hc151](/images/Mathematical_Electronic/74hc151.jpg)
+![74hc151_g](/images/Mathematical_Electronic/74hc151_graph.jpg)
+{{< admonition type=info title="" open=false >}}
+L是低电平。  
+H是高电平。
+{{< /admonition >}}
+![eg30](/images/Mathematical_Electronic/eg30.jpg)
+
+> #### 4.4.3.4 数据选择器构成查找表LUT
+
+![lut1](/images/Mathematical_Electronic/lut1.jpg)
+![lut2](/images/Mathematical_Electronic/lut2.jpg)
+
+> #### 4.4.3.5 利用数据选择器实现函数的一般步骤:（变量数=选通端数）
+1. 将函数变换成最小项表达式
+2. 选择输入信号S2、S1、S0作为函数的输入变量
+3. 处理数据输入D0~D7信号电平。逻辑表达式中有$m_i$ ,则相应$D_i$ =1，其他的数据输入端均为0。当变量数>选通端数，考虑如何将某些变量接入数据端。
+![eg29](/images/Mathematical_Electronic/eg29.jpg)
+> ### 4.6 组合逻辑电路的行为级建模
+
+
+> ### 4.6.1 if-else语句
+
+![if_eg](/images/Mathematical_Electronic/if_eg.jpg)
+```
+module chooser_4(S,D,Y);
+    input [1:0]S;
+    input [3:0]D;
+    output reg Y;
+    always@(D,S)
+        begin
+            if(S==2'b00) Y=D[0];
+            else if(S==2'b01) Y=D[1];
+            else if(S==2'b10) Y=D[2];
+            else Y=D[3];
+        end
+endmodule
+```
+{{< admonition type=warning title="" open=false >}}
+注意，过程赋值语句只能给寄存器型变量赋值，因此，输出变量Y的数据类型定义为reg。
+{{< /admonition >}}
+
+> ### 4.6.2 case语句
+{{< admonition type=info title="" open=false >}}
+用关键词casex和casez表示含有无关项x和高阻z的情况。
+{{< /admonition >}}
+{{< admonition type=warning title="" open=false >}}
+当分支项中的语句是多条语句，必须在最前面写上关键词begin，在最后写上关键词end，成为顺序语句块。
+{{< /admonition >}}
+> #### 4.6.2.1
+对具有使能端$E_n$的4选1数据选择器行为进行Verilog描述。当$E_n$=0时，数据选择器工作，$E_n$=1时，禁止工作，输出为0。
+```
+module choose_4(S,D,Y,E);
+    input [1:0] S;
+    input [3:0] D;
+    output reg Y;
+    input E;
+    always@(S,D,E)
+    begin
+        if(E==1'b1)
+        begin
+            case(S)
+                2'b00:Y<=D[0];
+                2'b01:Y<=D[1];
+                2'b10:Y<=D[2];
+                2'b11:Y<=D[3];
+            endcase
+        end
+        else Y<=1'b0
+    end
+endmodule
+```
+> #### 4.6.2.2
+
+对基本的4线-2线优先编码器的行为进行Verilog描述。
+```
+module coder_4_2(I,Y);
+    input [3:0]I;
+    output reg[1:0]Y;
+    always@(I)
+    begin
+        casex(I)
+            4'b1xxx:Y<=2'b11;
+            4'b01xx:Y<=2'b10;
+            4'b001x:Y<=2'b01;
+            4'b0001:Y<=2'b00;
+            default:Y<=2'bx;
+        endcase
+    end
+endmodule
+```
+
+> ### 4.6.3 for语句
+试用Verilog语言描述具有高电平使能的3线-8线译码器.
+```
+module trans_3_8(I,Y,E);
+    input [2:0]I;
+    input E;
+    output reg[7:0]Y;
+    integar k;
+    always@(I,E)
+    begin
+        Y=8'b1111_1111;
+        for(k=0;k<8;k=k+1)
+        begin
+            if(k==I&&E) Y[k]=0;
+            else Y[k]=1;
+        end
+    end
+endmodule
+```
+
+> ### 4.6.4 条件运算符
+例：用条件运算符描述了一个2选1的数据选择器
+```
+module chooser_2_1(
+    input [1:0]D;
+    input sel;
+    output reg Y;
+);
+    always@(D,sel)
+    begin
+        Y<=sel?D[1]:D[0];
+    end
+endmodule
+```
+```
+module choose_2_1(
+    input [1:0]D;
+    input sel;
+    output Y;
+);
+    assign Y<=sel?D[1]:D[0];
+endmodule
+```
+
+> ### 4.6.5 模块化设计方法
+分层次的电路设计:在电路设计中，将两个或多个模块组合起来描述电路逻辑功能的设计方法。
+
+设计方法：自顶向下和自底向上两种常用的设计方法。
+
+> #### 4.6.5.1 四位全加器
+![eg31](/images/Mathematical_Electronic/eg31.jpg)
+
+> ##### 4.6.5.1.1 半加器
+
+![half_adder](/images/Mathematical_Electronic/half_adder.jpg)
+
+```
+module half_adder(A,B,S,C);
+    input A,B;
+    output reg S,C;
+    always@(A,B)
+    begin
+        S<=A^B;
+        C<=A&B;
+    end
+endmodule
+```
+
+> ##### 4.6.5.1.2 全加器
+
+![full_adder](/images/Mathematical_Electronic/full_adder.jpg)
+
+```
+module full_adder(A,B,Ci,S,C0);
+    input A,B,Ci;
+    output S,C0;
+    wire S1,D1,D2;
+    half_adder HA1(A,B,S1,D1);
+    half_adder HA2(S1,Ci,S,D2);
+    or(C0,D1,D2);
+endmodule
+```
+
+> ##### 4.6.5.1.3 四位全加器
+![4badd](/images/Mathematical_Electronic/4badd.jpg)
+
+```
+module adder_4_dig(
+    input [3:0]A,B;
+    input CI;
+    output [3:0]S,
+    output CO
+)
+    wire [2:0]C;
+    full_adder fa0(A[0],B[0],CI,S[0],C[0]);
+    full_adder fa1(A[1],B[1],C[0],S[1],C[1]);
+    full_adder fa2(A[2],B[2],C[1],S[2],C[2]);
+    full_adder fa3(A[3],B[3],C[2],S[3],CO);
+endmodule
+```
+
+> # 5 锁存器和触发器
+
+> ## 5.1 双稳态电路
+
+> ### 5.1.1 基本的双稳态电路
+双稳态电路是锁存器和触发器的结构组成、功能实现的基础.
+
+![bi_stable](/images/Mathematical_Electronic/bi_stable.jpg)
+
+
+
+> ## 5.2 SR锁存器
+
+> ### 5.2.1 基本SR锁存器
+
+![sr1](/images/Mathematical_Electronic/sr1.jpg)
+
+> #### 5.2.1.1 工作原理
+1. 
+![sr2](/images/Mathematical_Electronic/sr2.jpg)
+
+2. 
+![sr3](/images/Mathematical_Electronic/sr3.jpg)
+
+3. 
+![sr4](/images/Mathematical_Electronic/sr4.jpg)
+
+4. 
+![sr5](/images/Mathematical_Electronic/sr5.jpg)
+
+> #### 5.2.1.2 真值表
+![sr6](/images/Mathematical_Electronic/sr6.jpg)
+
+> #### 5.2.1.3 变种
+![sr7](/images/Mathematical_Electronic/sr7.jpg)
+
+> #### 5.2.1.4 规律
+![sr8](/images/Mathematical_Electronic/sr8.jpg)
+
+> #### 5.2.1.5 运用
+运用基本SR锁存器消除机械开关触点抖动引起的脉冲输出。
+![sr9](/images/Mathematical_Electronic/sr9.jpg)
+
+> ### 5.2.2 门控SR锁存器
+![ensr](/images/Mathematical_Electronic/ensr.jpg)
+
+
+> ## 5.3 D锁存器
+> ### 5.3.1 电路结构
+![D1](/images/Mathematical_Electronic/D1.jpg)
+{{< admonition type=info title="" open=false >}}
+没有圆圈的一侧是高电平的时候TG就是通路。
+{{< /admonition >}}
+> ### 5.3.2 逻辑功能
+![d_func](/images/Mathematical_Electronic/d_func.jpg)
+
+
+> ## 5.4 触发器的电路结构和工作原理
+
+共同点：
+
+具有0 和1两个稳定状态，一旦状态被确定，就能自行保持。一个锁存器或触发器能存储一位二进制码。
+
+不同点：
+
+锁存器---对脉冲电平敏感的存储电路，在特定输入脉冲电平作用下改变状态。
+
+触发器---对脉冲边沿敏感的存储电路，在时钟脉冲的上升沿或下降沿的变化瞬间改变状态
+
+![triggers](/images/Mathematical_Electronic/triggers.jpg)
+
+> ### 5.4.1 D触发器
+
+> #### 5.4.1.1 电路结构
+
+两个D锁存器级联构成一个主从D触发器
+
+主锁存器与从锁存器结构相同(但使能信号相反)
+
+TG1和TG4的工作状态相同
+
+TG2和TG3的工作状态相同
+
+![locker1](/images/Mathematical_Electronic/locker1.jpg)
+
+> #### 5.4.1.2 D触发器工作原理
+
+
+
+1. CP=0时：
+
+    TG1导通，TG2断开——输入信号D 送入主锁存器。
+
+    Q'跟随D端的状态变化，使Q'=D
+
+    TG3断开，TG4导通——从锁存器维持在原来的状态不变。
+
+2. CP=1时：
+
+    TG1断开，TG2导通——输入信号D 不能送入主锁存器。主锁存器维持原态不变。
+
+    TG3导通，TG4断开——主锁存器Q'的信号送从锁存器Q端。使Q=D。
+
+    触发器的状态仅仅取决于CP信号上升沿到达前瞬间的D信号！
+
+> ##### 5.4.1.2.1 特性表
+
+|D |$Q_n$| $Q_{n+1}$|
+|--|-|-----|
+|0 |0 |0|
+|0 |1 |0|
+|1 |0 |1|
+|1 |1 |1|
+
+> ##### 5.4.1.2.2 特性方程
+$$ Q^{n+1} = D $$
+
+> ##### 5.4.1.2.3 状态图
+
+![d_pic](/images/Mathematical_Electronic/d_pic.jpg)
+
+> ### 5.4.2 JK触发器
+
+![jk_trigger](/images/Mathematical_Electronic/jk_trigger.jpg)
+
+{{< admonition type=tip title="" open=false >}}
+本质上JK触发器就是升级版的SR触发器，多了个翻转功能。
+{{< /admonition >}}
+
+> #### 5.4.2.1 工作原理
+
+> ##### 5.4.2.1.1 特性表
+
+|J |K |$Q_n$ |$Q_{n+1}$ |说明|
+|--|--|---|-----|----|
+|0 |0 |0  |0    |保持|
+|0 |0 |1  |1    |保持|
+|0 |1 |0  |0    |置0|
+|0 |1 |1  |0    |置0|
+|1 |0 |0  |1    |置1|
+|1 |0 |1  |1    |置1|
+|1 |1 |0  |1    |翻转|
+|1 |1 |1  |0    |翻转|
+
+> ##### 5.4.2.1.2 特性方程
+
+$$ Q_{n+1} = J\overline{ Q_{n} } + \overline{K}Q_{n} $$
+
+> ##### 5.4.2.1.2 状态转移图
+
+![jk_pic](/images/Mathematical_Electronic/jk_pic.jpg)
+
+> ### 5.4.3 T触发器
+
+![T_trigger](/images/Mathematical_Electronic/T_trigger.jpg)
+
+> #### 5.4.3.1 工作原理
+
+> ##### 5.4.3.1.1 特性表
+
+|T |Qn |Qn+1|
+|--|---|----|
+|0 |0  |0|
+|0 |1  |1|
+|1 |0  |1|
+|1 |1  |0|
+
+> ##### 5.4.3.1.2 特性方程
+
+$$ Q_{n+1} = T\overline{ Q_{n} } + \overline{T}Q_{n} $$
+
+> ##### 5.4.3.1.3 状态转移图
+
+![t_pic](/images/Mathematical_Electronic/t_pic.jpg)
+
+> ### 5.4.4 SR触发器
+
+![sr_trigger](/images/Mathematical_Electronic/sr_trigger.jpg)
+
+> #### 5.4.4.1 特性表
+
+|Qn |S |R |Qn+1|
+|---|--|--|----|
+|0  |0 |0 |   0|
+|1  |0 |0 |   1|
+|0  |0 |1 |   0|
+|1  |0 |1 |   0|
+|0  |1 |0 |   1|
+|1  |1 |0 |   1|
+|0  |1 |1 |   x|
+|1  |1 |1 |   x|
+
+> #### 5.4.4.2 特性方程
+
+
+$$Q_{n+1} = S + R\overline{ Q_{n} }$$
+$$ SR = 0 $$
+
+> #### 5.4.4.3 状态转移图
+
+![sr_pic](/images/Mathematical_Electronic/sr_pic.jpg)
+
+> ## 5.5 D触发器转换
+
+> ### 5.5.1 D触发器构成JK触发器
+
+![d2jk](/images/Mathematical_Electronic/d2jk.jpg)
+
+> ### 5.5.2 D触发器构成T触发器
+
+![d2t](/images/Mathematical_Electronic/d2t.jpg)
+
+> # 6 时序逻辑电路
+
+时序逻辑电路的工作特点是任意时刻的输出状态不仅与该当前的输入信号有关，而且与此前电路的状态有关。
+
+> ## 6.1 时序逻辑电路的基本概念
+
+> ### 6.1.1 时序逻辑电路的模型与分类
+
+> #### 6.1.1.1 时序电路的基本结构
+
+![time_circuit](/images/Mathematical_Electronic/time_circuit.jpg)
+
+> #### 6.1.1.2 时序逻辑电路的分类
+
+按状态变化分类：
+1. 同步时序电路:电路状态的变化在同一时钟脉冲作用下发生，即存储电路里所有触发器有一个统一的时钟源，它们的状态在同一时刻更新。
+2. 异步时序电路:没有统一的时钟脉冲或没有时钟脉冲，电路的状态更新不是同时发生的。
+   
+![classfication2](/images/Mathematical_Electronic/classfication2.jpg)
+
+按输出信号分类：
+1. 米利（Mealy）型时序电路:电路的输出是输入变量及触发器输出Q1、Q0 的函数，这类时序电路亦称为米利型电路
+2. 穆尔（ Moore）型时序电路:电路输出仅仅取决于各触发器的状态，而不受电路当时的输入信号影响或没有输入变量，这类电路称为穆尔型电路
+
+![classfication1](/images/Mathematical_Electronic/classfication1.jpg)
+> ## 6.2 同步 时序逻辑电路的分析
+
+
+> ### 6.2.1 逻辑方程组
+
+输出方程: $O＝f_1(I,S)$
+
+表达输出信号与输入信号、状态变量的关系式
+
+激励方程: $E＝f_2(I,S)$ 
+
+表达了激励信号与输入信号、状态变量的关系式
+
+状态方程: $S^{n+1}＝f_3(E,S^n)$
+
+表达存储电路从现态到次态的转换关系式
+
+{{< admonition type=note title="" open=false >}}
+状态方程是由激励方程和所用的触发器的类型决定的
+{{< /admonition >}}
+
+> #### 6.2.2 表达过程
+
+1. 列出逻辑方程组
+2. 根据方程组列出状态转换真值表
+3. 将状态转换真值表化为转换表
+4. 根据转换表得状态表
+5. 根据状态表画状态转移图
+
+> #### 6.2.2.1 例
+
+![eg32](/images/Mathematical_Electronic/eg32.jpg)
+
+1. 列出逻辑方程组：
+   
+   - 输出方程：$$X = Q_0\overline{ Q_1 }$$
+                $$Y = \overline{A} ( Q_0 + Q_1 ) $$
+   - 激励方程：$$ D_0 = A ( Q_0 + Q_1 ) $$
+                $$ D_1 = A \overline{Q_0} $$
+   - 状态方程：
+        $$ 
+        Q^{n+1}_{0} = A ( Q^{n}_0 + Q^{n}_1 ) 
+        $$
+
+        $$ 
+        Q_{1}^{n+1} = A \overline{ Q_{0}^{n} } 
+        $$
+2. 根据方程组列出状态转换真值表:
+
+|A| $Q_0^n$| $Q_1^n$| $Q_0^{n+1}$| $Q_1^{n+1}$| X| Y|
+|-|----|----|------|------|--|--|
+|0| 0  | 0  | 0    | 0    | 0| 0|
+|0| 0  | 1  | 0    | 0    | 0| 1|
+|0| 1  | 0  | 0    | 0    | 1| 1|
+|0| 1  | 1  | 0    | 0    | 0| 1|
+|1| 0  | 0  | 0    | 1    | 0| 0|
+|1| 0  | 1  | 1    | 1    | 0| 0|
+|1| 1  | 0  | 1    | 0    | 1| 0|
+|1| 1  | 1  | 1    | 0    | 0| 0|
+
+
+3. 将状态转换真值表化为转换表
+   
+![eg33](/images/Mathematical_Electronic/eg33.jpg)
+
+4. 根据转换表得状态表
+
+令$S^n$为$Q_0^nQ_1^n$，$S^{n+1}$为$Q_0^{n+1}Q_0^{n+1}$，4个状态为00=a，01=b，10=c，11=d，得：
+
+![eg34](/images/Mathematical_Electronic/eg34.jpg)
+
+5. 根据状态表画状态转移图
+   
+![eg35](/images/Mathematical_Electronic/eg35.jpg)
+
+
+> ## 6.3 同步 时序逻辑电路的设计
+{{< admonition type=note title="" open=false >}}
+同步时序逻辑电路的设计是分析的逆过程,其任务是根据实际逻辑问题的要求，设计出能实现给定逻辑功能的电路。
+{{< /admonition >}}
+> ### 6.3.1 设计同步时序逻辑电路的一般步骤
+
+> #### 6.3.1.1 根据给定的逻辑功能建立原始状态图和原始状态表
+
+1. 明确电路的输入条件和相应的输出要求，分别确定输入变量和输出变量的数目和符号。
+2. 找出所有可能的状态和状态转换之间的关系。
+3. 根据原始状态图建立原始状态表。
+
+> #### 6.3.1.2 状态化简-----求出最简状态图
+合并等价状态，消去多余状态的过程称为状态化简
+
+{{< admonition type=info title="" open=false >}}
+等价状态：在相同的输入下有相同的输出，并转换到同一个次态去的两个状态称为等价状态。
+{{< /admonition >}}
+
+> #### 6.3.1.3 状态编码（状态分配）
+
+给每个状态赋以二进制代码的过程。
+
+$2^{n-1}$ < M $\leq 2^n$ （M:状态数;n:触发器的个数）
+
+{{< admonition type=info title="" open=false >}}
+状态编码的位数即为触发器的个数
+{{< /admonition >}}
+
+
+> #### 6.3.1.4 选择触发器的类型
+> 
+> #### 6.3.1.5 求出电路的激励方程和输出方程
+> #### 6.3.1.6 画出逻辑图并检查自启动能力
+
+
+> ## 6.5 若干典型的时序逻辑电路
+
+> ### 6.5.1 寄存器和移位寄存器
+在数字电路系统中，把需要处理的二进制数据或代码暂时存储起来，以便在需要的时候随时取用，这样的操作叫做寄存
+
+> #### 6.5.1.1 8位CMOS寄存器74HC374
+
+![74HC374](/images/Mathematical_Electronic/74HC374.jpg)
+
+> #### 6.5.1.2 移位寄存器
+
+移位寄存器是既能寄存数码，又能在时钟脉冲的作用下使数码在高低位之间移动的逻辑功能部件。
+
+![reg_classfication](/images/Mathematical_Electronic/reg_classfication.jpg)
+
+> ##### 6.5.1.2.1 基本移位寄存器
+
+![move_reg](/images/Mathematical_Electronic/move_reg.jpg)
+
+> ##### 6.5.1.2.2 多功能双向移位寄存器
+
+![74hc194](/images/Mathematical_Electronic/74HC194.jpg)
+
+![74hc194_tab](/images/Mathematical_Electronic/74hc194_tab.jpg)
+
+> ### 6.5.2 计数器
+
+计数器的基本功能是对输入时钟脉冲进行计数。它也可用于分频、定时、产生节拍脉冲和脉冲序列及进行数字运算等等。
+
+> #### 6.5.2.1 二进制计数器
+
+![bi_cnt](/images/Mathematical_Electronic/binary_counter.jpg)
+
+{{< admonition type=note title="" open=false >}}
+$Q_0$在每个CP都翻转一次，$FF_0$可采用T=1的T触发器。  
+$Q_1$仅在$Q_0$=1后的下一个CP到来时翻转，$FF_1$可采用T= $Q_0$的T触发器。  
+$Q_2$仅在$Q_0$=$Q_1$=1后的下一个CP到来时翻转。$FF_2$可采用T= $Q_0Q_1$的T触发器。  
+$Q_3$仅在$Q_0$=$Q_1$=$Q_2$=1后的下一个CP到来时翻转。$FF_3$可采用T= $Q_0Q_1Q_2$的T触发器。
+{{< /admonition >}}
+
+![4d_bi_cnt](/images/Mathematical_Electronic/4d_bi_cnt.jpg)
+
+> ##### 6.5.2.1.1 74LVC161
+
+![4d_bi_cnt1](/images/Mathematical_Electronic/4d_bi_cnt1.jpg)
+
+![74LVC161](/images/Mathematical_Electronic/74LVC161.PNG)
+
+用74LVC161构成九进制加计数器:
+
+1. 反馈清零法：利用异步置零输入端，在M进制计数器的计数过程中，跳过M-N个状态，得到N进制计数器的方法。
+   
+   ![9D74LVC161](/images/Mathematical_Electronic/9D74LVC161.PNG)
+
+2. 反馈置数法:利用同步置数端，在M进制计数器的计数过程中，跳过M-N个状态，得到N进制计数器的方法。
+
+    ![9D74LVC161_1](/images/Mathematical_Electronic/9D74LVC161_1.PNG)
+    
+用74VC161组成256进制计数器:
+
+1. 并行进位：低位片的进位作为高位片的使能
+   
+   ![256cnt1](/images/Mathematical_Electronic/256cnt1.PNG)
+
+2. 串行进位：低位片的进位作为高位片的时钟
+
+   ![256cnt2](/images/Mathematical_Electronic/256cnt2.PNG)
+
+{{< admonition type=info title="" open=false >}}
+如果不加反相器，00001110的下个状态不再是00001111而是00011111。加了反相器使得00001110的下个状态时00001111，然后00001111的下个状态是00010000。
+{{< /admonition >}}
+
