@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/Septemus.github.io\/math_electronic\/"
-        },"genre": "posts","wordcount":  10013 ,
+        },"genre": "posts","wordcount":  10915 ,
         "url": "https:\/\/Septemus.github.io\/math_electronic\/","datePublished": "2023-01-14T10:57:02+08:00","dateModified": "2023-01-14T10:57:02+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -103,8 +103,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">数字电子技术理论笔记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Septemus</a></span>&nbsp;<span class="post-category">included in <a href="/categories/college/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>college</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-14">2023-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10013 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-14">2023-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10915 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;22 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -497,6 +497,32 @@
                 <li><a href="#65211-74lvc161">6.5.2.1.1 74LVC161</a></li>
               </ul>
             </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#67-用verilog-hdl描述时序逻辑电路">6.7 用Verilog HDL描述时序逻辑电路</a>
+      <ul>
+        <li><a href="#671-移位寄存器">6.7.1 移位寄存器</a></li>
+        <li><a href="#672-计数器">6.7.2 计数器</a></li>
+        <li><a href="#673-状态转换图">6.7.3 状态转换图</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#71-只读存储器-rom">7.1 只读存储器 (ROM）</a>
+      <ul>
+        <li><a href="#711-基本概念">7.1.1 基本概念</a></li>
+      </ul>
+    </li>
+    <li><a href="#72-随机存取存储器-ram">7.2 随机存取存储器 (RAM)</a>
+      <ul>
+        <li><a href="#721-静态随机存取存储器sram">7.2.1 静态随机存取存储器(SRAM)</a></li>
+        <li><a href="#723-动态随机存取存储器dram">7.2.3 动态随机存取存储器(DRAM)</a>
+          <ul>
+            <li><a href="#7231-写操作">7.2.3.1 写操作</a></li>
+            <li><a href="#7232-读操作">7.2.3.2 读操作</a></li>
           </ul>
         </li>
       </ul>
@@ -3184,6 +3210,241 @@ $Q_3$仅在$Q_0$=$Q_1$=$Q_2$=1后的下一个CP到来时翻转。$FF_3$可采用
             <div class="admonition-content">如果不加反相器，00001110的下个状态不再是00001111而是00011111。加了反相器使得00001110的下个状态时00001111，然后00001111的下个状态是00010000。</div>
         </div>
     </div>
+<blockquote>
+<h2 id="67-用verilog-hdl描述时序逻辑电路">6.7 用Verilog HDL描述时序逻辑电路</h2>
+</blockquote>
+<blockquote>
+<h3 id="671-移位寄存器">6.7.1 移位寄存器</h3>
+</blockquote>
+<p>用行为级描述always描述一个４位双向移位寄存器，有异步清零、同步置数、左移、右移和保持。功能同74HC194。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">reg4</span><span class="p">(</span><span class="nv">clk</span><span class="p">,</span><span class="nv">clr</span><span class="p">,</span><span class="nc">S</span><span class="p">,</span><span class="nv">data</span><span class="p">,</span><span class="nv">left0</span><span class="p">,</span><span class="nv">right0</span><span class="p">,</span><span class="nv">en</span><span class="p">,</span><span class="nc">Q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nv">clk</span><span class="p">,</span><span class="nv">clr</span><span class="p">,</span><span class="nv">left0</span><span class="p">,</span><span class="nv">right0</span><span class="p">,</span><span class="nv">en</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">1</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nc">S</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nv">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nc">Q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nv">posedge</span> <span class="nv">clk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="nv">clr</span><span class="p">)</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="mi">4</span><span class="s1">&#39;b0000;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        else if(en)
+</span></span></span><span class="line"><span class="cl"><span class="s1">        begin
+</span></span></span><span class="line"><span class="cl"><span class="s1">            case(S)
+</span></span></span><span class="line"><span class="cl"><span class="s1">            2&#39;</span><span class="nv">b00</span><span class="p">:</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="nc">Q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span><span class="s1">&#39;b01: Q&lt;={Q[2:0],right0};
+</span></span></span><span class="line"><span class="cl"><span class="s1">            2&#39;</span><span class="nv">b10</span><span class="p">:</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="p">{</span><span class="nv">left0</span><span class="p">,</span><span class="nc">Q</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">1</span><span class="p">]};</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">2</span><span class="s1">&#39;b11: Q&lt;=data;     
+</span></span></span><span class="line"><span class="cl"><span class="s1">            endcase
+</span></span></span><span class="line"><span class="cl"><span class="s1">        end
+</span></span></span><span class="line"><span class="cl"><span class="s1">    end
+</span></span></span><span class="line"><span class="cl"><span class="s1">endmodule
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="672-计数器">6.7.2 计数器</h3>
+</blockquote>
+<p>用Verilog描述带使能端和同步置数端的可逆4位二进制计数器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">counter</span><span class="p">(</span><span class="nv">clk</span><span class="p">,</span><span class="nv">en</span><span class="p">,</span><span class="nv">set</span><span class="p">,</span><span class="nv">data</span><span class="p">,</span><span class="nc">Q</span><span class="p">,</span><span class="nv">flag</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="nv">en</span><span class="p">,</span><span class="nv">set</span><span class="p">,</span><span class="nv">flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">input</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nv">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">output</span> <span class="nv">reg</span> <span class="p">[</span><span class="err">3</span><span class="p">:</span><span class="s">0</span><span class="p">]</span> <span class="nc">Q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">always</span><span class="o">@</span><span class="p">(</span><span class="nv">posedge</span> <span class="nv">clk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">begin</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">en</span><span class="p">)</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="nc">Q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nv">set</span><span class="p">)</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="nv">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nv">flag</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="nc">Q</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="nc">Q</span><span class="o">&lt;=</span><span class="nc">Q</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">end</span>
+</span></span><span class="line"><span class="cl"><span class="nv">endmodule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h3 id="673-状态转换图">6.7.3 状态转换图</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/eg36.jpg"
+        data-srcset="/images/Mathematical_Electronic/eg36.jpg, /images/Mathematical_Electronic/eg36.jpg 1.5x, /images/Mathematical_Electronic/eg36.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/eg36.jpg"
+        title="eg36" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="kn">module</span> <span class="nf">loop</span><span class="p">(</span><span class="nc">A</span><span class="p">,</span><span class="nc">Y</span><span class="p">,</span><span class="nv">clk</span><span class="p">,</span><span class="nv">clr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">parameter</span> <span class="nc">S0</span><span class="o">=</span><span class="mi">2</span><span class="s1">&#39;b00,S1=2&#39;</span><span class="nv">b01</span><span class="p">,</span><span class="nc">S2</span><span class="o">=</span><span class="mi">2</span><span class="s1">&#39;b11;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    input A,clk;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    reg [1:0] cur,next;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    output reg Y;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    always@(posedge clk,negedge clr)
+</span></span></span><span class="line"><span class="cl"><span class="s1">    begin
+</span></span></span><span class="line"><span class="cl"><span class="s1">        if(clr) cur&lt;=S0;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        else if(clk) cur&lt;=next;
+</span></span></span><span class="line"><span class="cl"><span class="s1">    end
+</span></span></span><span class="line"><span class="cl"><span class="s1">    always@(posedge clk)
+</span></span></span><span class="line"><span class="cl"><span class="s1">    begin
+</span></span></span><span class="line"><span class="cl"><span class="s1">        Y&lt;=0;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        case(cur)
+</span></span></span><span class="line"><span class="cl"><span class="s1">            S0: next&lt;=A?S1:S2;
+</span></span></span><span class="line"><span class="cl"><span class="s1">            S1: next&lt;=A?S0:S2;
+</span></span></span><span class="line"><span class="cl"><span class="s1">            S2: if(A) next&lt;=S2;
+</span></span></span><span class="line"><span class="cl"><span class="s1">                else begin next&lt;=S0;Y&lt;=1;
+</span></span></span><span class="line"><span class="cl"><span class="s1">            default: next&lt;=S0;
+</span></span></span><span class="line"><span class="cl"><span class="s1">        endcase
+</span></span></span><span class="line"><span class="cl"><span class="s1">    end
+</span></span></span><span class="line"><span class="cl"><span class="s1">endmodule
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<h1 id="7-半导体存储器">7 半导体存储器</h1>
+</blockquote>
+<blockquote>
+<h2 id="71-只读存储器-rom">7.1 只读存储器 (ROM）</h2>
+</blockquote>
+<p>ROM是一种永久性数据存储器，其中的数据一般由专用的装置写入，数据一旦写入，不能随意改写，在切断电源之后，数据也不会消失。</p>
+<p>ROM主要由地址译码器、存储矩阵和输出控制电路三部分组成。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/rom_struct.jpg"
+        data-srcset="/images/Mathematical_Electronic/rom_struct.jpg, /images/Mathematical_Electronic/rom_struct.jpg 1.5x, /images/Mathematical_Electronic/rom_struct.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/rom_struct.jpg"
+        title="rom_struct" /></p>
+<blockquote>
+<h3 id="711-基本概念">7.1.1 基本概念</h3>
+</blockquote>
+<ol>
+<li>存储容量（M)：存储单元的数目。</li>
+<li>字：存储器中作为一个整体被存取传送处理的一组数据 。</li>
+<li>字长：一个字所含的位数称为字长。</li>
+<li>字数：字的总量。</li>
+<li>地址线个数/地址码位数n：字数=$2^n$</li>
+<li>数据位数=位数。</li>
+</ol>
+<p>例：容量为64K ×1的存储系统有多少个存储单元？其地址码需要几位？数据位是几位？</p>
+<p>存储单元数=字数×位数=64K×1=64K个=$2^{16}$个</p>
+<p>地址线数：</p>
+<p>因为字数为64K=$2^{16}$个，即n=16，所以地址线数为16位而数据线数等于位数，故数据线为1位</p>
+<div class="details admonition info">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw" aria-hidden="true"></i>Info<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">1K=1024=$2^{10}$<br>
+1M=1024K=$2^{20}$<br>
+1G=1024M=$2^{30}$</div>
+        </div>
+    </div>
+<blockquote>
+<h2 id="72-随机存取存储器-ram">7.2 随机存取存储器 (RAM)</h2>
+</blockquote>
+<p>在正常工作状态只能读出信息。断电后信息不会丢失，常用于存放固定信息(如程序、常数等)。</p>
+<blockquote>
+<h3 id="721-静态随机存取存储器sram">7.2.1 静态随机存取存储器(SRAM)</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sram.jpg"
+        data-srcset="/images/Mathematical_Electronic/sram.jpg, /images/Mathematical_Electronic/sram.jpg 1.5x, /images/Mathematical_Electronic/sram.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sram.jpg"
+        title="sram" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/sram_workmode.jpg"
+        data-srcset="/images/Mathematical_Electronic/sram_workmode.jpg, /images/Mathematical_Electronic/sram_workmode.jpg 1.5x, /images/Mathematical_Electronic/sram_workmode.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/sram_workmode.jpg"
+        title="sram_workmode" /></p>
+<blockquote>
+<h3 id="723-动态随机存取存储器dram">7.2.3 动态随机存取存储器(DRAM)</h3>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/Mathematical_Electronic/dram.jpg"
+        data-srcset="/images/Mathematical_Electronic/dram.jpg, /images/Mathematical_Electronic/dram.jpg 1.5x, /images/Mathematical_Electronic/dram.jpg 2x"
+        data-sizes="auto"
+        alt="/images/Mathematical_Electronic/dram.jpg"
+        title="dram" /></p>
+<blockquote>
+<h4 id="7231-写操作">7.2.3.1 写操作</h4>
+</blockquote>
+<p>X=1 $\overline{WE}$=0  T导通，电容器C与位线B连通。</p>
+<p>输入缓冲器被选通，数据$D_I$经缓冲器和位线写入存储单元如果$D_I$为1，则向电容器充电，C存1;反之电容器放电,C存0 。</p>
+<blockquote>
+<h4 id="7232-读操作">7.2.3.2 读操作</h4>
+</blockquote>
+<p>X=1 $\overline{WE}$=1</p>
+<p>T导通，电容器C与位线B连通</p>
+<p>输出缓冲器/灵敏放大器被选通，C中存储的数据通过位线和缓冲器由D0输出</p>
+<p>每次读出后，必须及时对读出单元刷新，即此时刷新控制R也为高电平，则读出的数据又经刷新缓冲器和位线对电容器C进行刷新。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">

@@ -1199,3 +1199,148 @@ $Q_3$仅在$Q_0$=$Q_1$=$Q_2$=1后的下一个CP到来时翻转。$FF_3$可采用
 如果不加反相器，00001110的下个状态不再是00001111而是00011111。加了反相器使得00001110的下个状态时00001111，然后00001111的下个状态是00010000。
 {{< /admonition >}}
 
+
+> ## 6.7 用Verilog HDL描述时序逻辑电路
+
+> ### 6.7.1 移位寄存器
+
+用行为级描述always描述一个４位双向移位寄存器，有异步清零、同步置数、左移、右移和保持。功能同74HC194。
+
+```
+module reg4(clk,clr,S,data,left0,right0,en,Q);
+
+    input clk,clr,left0,right0,en;
+    input [1:0] S;
+    input [3:0] data;
+    output reg [3:0] Q;
+    always@(posedge clk)
+    begin
+        if(clr) Q<=4'b0000;
+        else if(en)
+        begin
+            case(S)
+            2'b00: Q<=Q;
+            2'b01: Q<={Q[2:0],right0};
+            2'b10: Q<={left0,Q[3:1]};
+            2'b11: Q<=data;     
+            endcase
+        end
+    end
+endmodule
+```
+
+> ### 6.7.2 计数器
+
+用Verilog描述带使能端和同步置数端的可逆4位二进制计数器
+
+```
+module counter(clk,en,set,data,Q,flag);
+    input en,set,flag;
+    input [3:0] data;
+    output reg [3:0] Q;
+    always@(posedge clk)
+    begin
+        if(!en) Q<=Q;
+        else if(set) Q<=data;
+        else if(flag==1) Q<=Q+1;
+        else Q<=Q-1;
+    end
+endmodule
+
+```
+
+> ### 6.7.3 状态转换图
+
+![eg36](/images/Mathematical_Electronic/eg36.jpg)
+
+```
+module loop(A,Y,clk,clr);
+    parameter S0=2'b00,S1=2'b01,S2=2'b11;
+    input A,clk;
+    reg [1:0] cur,next;
+    output reg Y;
+    always@(posedge clk,negedge clr)
+    begin
+        if(clr) cur<=S0;
+        else if(clk) cur<=next;
+    end
+    always@(posedge clk)
+    begin
+        Y<=0;
+        case(cur)
+            S0: next<=A?S1:S2;
+            S1: next<=A?S0:S2;
+            S2: if(A) next<=S2;
+                else begin next<=S0;Y<=1;
+            default: next<=S0;
+        endcase
+    end
+endmodule
+
+```
+
+> # 7 半导体存储器
+
+
+> ## 7.1 只读存储器 (ROM）
+
+ROM是一种永久性数据存储器，其中的数据一般由专用的装置写入，数据一旦写入，不能随意改写，在切断电源之后，数据也不会消失。
+
+ROM主要由地址译码器、存储矩阵和输出控制电路三部分组成。
+
+![rom_struct](/images/Mathematical_Electronic/rom_struct.jpg)
+
+> ### 7.1.1 基本概念
+
+1. 存储容量（M)：存储单元的数目。
+2. 字：存储器中作为一个整体被存取传送处理的一组数据 。
+3. 字长：一个字所含的位数称为字长。
+4. 字数：字的总量。
+5. 地址线个数/地址码位数n：字数=$2^n$
+6. 数据位数=位数。
+
+例：容量为64K ×1的存储系统有多少个存储单元？其地址码需要几位？数据位是几位？
+
+存储单元数=字数×位数=64K×1=64K个=$2^{16}$个
+
+地址线数：
+
+因为字数为64K=$2^{16}$个，即n=16，所以地址线数为16位而数据线数等于位数，故数据线为1位
+
+{{< admonition type=info title="" open=false >}}
+1K=1024=$2^{10}$  
+1M=1024K=$2^{20}$  
+1G=1024M=$2^{30}$
+{{< /admonition >}}
+
+> ## 7.2 随机存取存储器 (RAM)
+
+在正常工作状态只能读出信息。断电后信息不会丢失，常用于存放固定信息(如程序、常数等)。
+
+> ### 7.2.1 静态随机存取存储器(SRAM)
+
+![sram](/images/Mathematical_Electronic/sram.jpg)
+
+![sram_workmode](/images/Mathematical_Electronic/sram_workmode.jpg)
+
+> ### 7.2.3 动态随机存取存储器(DRAM)
+
+![dram](/images/Mathematical_Electronic/dram.jpg)
+
+> #### 7.2.3.1 写操作
+
+X=1 $\overline{WE}$=0  T导通，电容器C与位线B连通。
+
+输入缓冲器被选通，数据$D_I$经缓冲器和位线写入存储单元如果$D_I$为1，则向电容器充电，C存1;反之电容器放电,C存0 。
+
+> #### 7.2.3.2 读操作
+
+X=1 $\overline{WE}$=1
+
+T导通，电容器C与位线B连通
+
+输出缓冲器/灵敏放大器被选通，C中存储的数据通过位线和缓冲器由D0输出
+
+每次读出后，必须及时对读出单元刷新，即此时刷新控制R也为高电平，则读出的数据又经刷新缓冲器和位线对电容器C进行刷新。
+
+
